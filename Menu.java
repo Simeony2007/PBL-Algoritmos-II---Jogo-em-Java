@@ -4,4 +4,11 @@ public class Menu{
 	public String getOpcoes(){
 		return opcoes;
 	}
+	public Partida iniciarJogo(){
+		Partida partida = new Partida;
+		return partida;
+	}
+	public boolean sairDoJogo(){
+		return false;
+	}
 }

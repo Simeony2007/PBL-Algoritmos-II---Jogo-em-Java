@@ -1,10 +1,21 @@
+import java.util.ArrayList;
+
 public class Cena{
 
-	private Fala falas[] = new Fala();
-	falas[0].adicionarTexto("Teste")
+	private ArrayList<Fala> falas[];
+	private int falaAtual;
 
-	public String[] exibirFalas(){
+	public void Fala(){
+		this.falas[] = new ArrayList<Fala>();
+	}
+
+	public String proximaFala(){
+		return falas[falaAtual++].getTexto();
+	}
+	public String[] getFalas(){
 		return falas;
 	}
+
+
 
 }
