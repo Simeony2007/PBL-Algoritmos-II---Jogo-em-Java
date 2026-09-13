@@ -1,7 +1,12 @@
-public class Fala{
+package model.service;
+public class Dialogue{
 
 	// Texto da fala
 	private String texto;
+
+	public Dialogue(String texto){
+		this.texto = texto;
+	}
 
 	// Retorna o texto guardado no atributo
 	public String getTexto(){
