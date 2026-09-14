@@ -1,4 +1,4 @@
-package model.service;
+package pbl.model.service;
 
 public class Npc {
     private String name;

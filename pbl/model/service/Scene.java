@@ -1,67 +1,31 @@
-package model.service;
+package pbl.model.service;
 import java.util.ArrayList;
 
 public class Scene{
-	// Atributos
 	private ArrayList<Dialogue> dialogue = new ArrayList<>();
 	private ArrayList<Option> option = new ArrayList<>();
-	//private ArrayList<Npc> character = new ArrayList<>();
-	private int currentDialogue = 0;
+	private Npc npc;
+	private String nextScene;
 
-	// public void newNpc(String name, int affinity){
-	//     Npc genericNpc = new Npc(name, affinity);
-	//     character.add(genericNpc);
-	//}
-
-	public String nextDialogueText(){
-		return dialogue.get(currentDialogue++).getText();
+	public Scene(){
+		this.nextScene = null;
+		this.npc = null;
 	}
 
-	// Adicionar novo Diálogo
 	public void addDialogue(String text){
-		Dialogue newDialogue = new Dialogue(text);
-		dialogue.add(text);
-		lastDialogueAdded++;
-		return lastDialogueAdded;
+		dialogue.add(new Dialogue(text));
 	}
 
-	public boolean optionExists(){
-		return option.size() > 0;
+	public void addOption(String text, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
+		option.add(new Option(text, nextScene, nObol, nLove, nAnger, nSadness, nAffinity));
 	}
 
-	public void addOption(String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
-		Option newOption = new Option(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity);
-		option.add(newOption);
+	public void currentNpc(Npc npc){
+		this.npc = npc;
 	}
 
-
-	// --------------- Funções de Dialogue ------------------
-	
-	public String getText(int id){
-		return dialogue.get(id).toString();
+	public void setNextScene(String nextScene){
+		this.nextScene = nextScene;
 	}
 
-	// --------- Funções de Options ----------
-
-	public String getOptionText(int id){
-		return option.get(id).getText();
-	}
-	public String getOptionNextScene(int id){
-		return option.get(id).getNextScene();
-	}
-	public int getOptionLove(int id){
-		return option.get(id).getLove();
-	}
-	public int getOptionAffinity(int id){
-		return option.get(id).getAffinity();
-	}
-	public int getOptionObol(int id){
-		return option.get(id).getObol();
-	}
-	public int getOptionSadness(int id){
-		return option.get(id).getSadness();
-	}
-	public int getOptionAnger(int id){
-		return option.get(id).getAnger();
-	}
 }

@@ -1,8 +1,8 @@
-package model.service;
+package pbl.controller;
 import java.util.ArrayList;
 
-import model.service.Chapter;
-import view.GameInterface;
+import pbl.model.service*;
+import pbl.view.GameInterface;
 
 public class Game{
 	private Orfeu protagonista;
