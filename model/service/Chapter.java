@@ -25,6 +25,7 @@ public class Chapter {
 
 	public void addScene(){
 		Scene newScene = new Scene();
+		
 		scenes.add(newScene);
 	}
 
@@ -38,7 +39,7 @@ public class Chapter {
 
 
 	// ------------- Funções de Scene ----------------
-	public String nextDialogue(int id){
+	public String nextDialogueText(int id){
 		return scenes.get(id).getText();
 	}
 	public ArrayList<Dialogue> getDialogue(){
@@ -51,15 +52,6 @@ public class Chapter {
 		return scenes.get(sceneId).getText(dialogueId);
 	}
 
-	// Adiciona um novo texto
-	public void	setText(int sceneId ,int dialogueId, String newText){
-		scenes.get(sceneId).setText(dialogueId, newText);
-	}
-
-	public ArrayList<Option> getOption(int sceneId, int dialogId){
-		return scenes.get(sceneId).getOption(dialogueId);
-	}
-
 	public boolean optionExists(int sceneId, int dialogId){
 		return scenes.get(sceneId).optionExists(dialogId);
 	}
@@ -68,21 +60,5 @@ public class Chapter {
 		return scenes.get(sceneId).getOptionText(dialogId);
 	}
 
-	public String getOptionText(int sceneId, int dialogueId, int optionID){
-		return scenes.get(sceneId).getOptionText(dialogueId, optionID);
-	}
-
-	// --------- Funções de Options ----------
-	public int getOptionLoveChange(int sceneId, int dialogueId, int optionID){
-		return scenes.get(sceneId).getLoveChange(dialogueId, optionID);
-	}
-	public int getOptionAngryChange(int sceneId, int dialogueId, int optionID){
-		return scenes.get(sceneId).getAngryChange(dialogueId, optionID);
-	}
-	public int getOptionSadnessChange(int sceneId, int dialogueId, int optionID){
-		return scenes.get(sceneId).getSadnessChange(dialogueId, optionID);
-	}
-	public int getOptionRouteChange(int sceneId, int dialogueId, int optionID){
-		return scenes.get(sceneId).getRouteChange(dialogueId, optionID);
-	}
+	
 }

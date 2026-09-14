@@ -5,8 +5,9 @@ public class Dialogue{
 
 	// Atributos
 	private String text;
-	private ArrayList<Option> option = new ArrayList<>();
+	
 
+	// Construtor
 	public Dialogue(String text){
 		this.text = text;
 	}
@@ -20,13 +21,9 @@ public class Dialogue{
 		option.add(newOption);
 	}
 
-	public void	setText(String newText){
-		text = newText;
-	}
-
-	public ArrayList<Option> getOption(){
-		return option;
-	}
+	// public void	setText(String newText){
+	// 	text = newText;
+	// } Não vamos criar dialogos sem fala pra depois adicionar a fala...
 
 	public boolean optionExists(){
 		return option.size() > 0;
@@ -42,29 +39,5 @@ public class Dialogue{
 		}
 		return text;
 	}
-
-
-	// --------- Funções de Options ----------
-
-	public String getOptionText(int id){
-		return option.get(id).getText();
-	}
-	public String getOptionNextScene(int id){
-		return option.get(id).getNextScene();
-	}
-	public int getOptionLove(int id){
-		return option.get(id).getLove();
-	}
-	public int getOptionAffinity(int id){
-		return option.get(id).getAffinity();
-	}
-	public int getOptionObol(int id){
-		return option.get(id).getObol();
-	}
-	public int getOptionSadness(int id){
-		return option.get(id).getSadness();
-	}
-	public int getOptionAnger(int id){
-		return option.get(id).getAnger();
-	}
+	
 }

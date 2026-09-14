@@ -5,24 +5,31 @@ import java.util.ArrayList;
 public class Scene{
 	// Atributos
 	private ArrayList<Dialogue> dialogue = new ArrayList<>();
+	private ArrayList<Option> option = new ArrayList<>();
 	private int currentDialogue = 0;
+	private int lastDialogueAdded = -1;
 
-	public String nextDialogue(){
+	public String nextDialogueText(){
 		return dialogue.get(currentDialogue++).getText();
 	}
 	public ArrayList<Dialogue> getDialogue(){
 		return dialogue;
 	}
+
+	// Adicionar novo Diálogo
 	public void addDialogue(String text){
 		Dialogue newDialogue = new Dialogue(text);
 		dialogue.add(text);
+		lastDialogueAdded++;
+		return lastDialogueAdded;
 	}
 
-	public void addDialogueWOption(String text, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
-		Dialogue newDialogue = new Dialogue(text);
-		newDialogue.addOption(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity);
-		dialogue.add(text);
-	}
+	// Diálogo com escolhas
+	// public void addDialogueWOption(String text, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
+	// 	Dialogue newDialogue = new Dialogue(text);
+	// 	newDialogue.addOption(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity);
+	// 	dialogue.add(text);
+	// } Repetido, podemos simplesmente usar addDialogue e depois addOption(id da nova dialogue)
 
 	// --------------- Funções de Dialogue ------------------
 	public void addOption(int id, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
@@ -33,46 +40,35 @@ public class Scene{
 	}
 
 	// Adiciona um novo texto
-	public void	setText(int id, String newText){
-		dialogue.get(id).setText(newText);
-	}
-
-	public ArrayList<Option> getOption(int id){
-		return dialogue.get(id).getOption();
-	}
+	// public void	setText(int id, String newText){
+	// 	dialogue.get(id).setText(newText);
+	// } Já vai criar com o texto!
 
 	public boolean optionExists(){
 		return dialogue.get(id).optionExists();
 	}
 
-	public String getOptionText(){
-		return dialogue.get(id).getOptionText();
-	}
-
-	public String getOptionText(int dialogueId, int optionID){
-		return dialogue.get(id).getOptionText(optionID);
-	}
-
 	// --------- Funções de Options ----------
-	public String getOptionText(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getText(optionID);
+
+	public String getOptionText(int id){
+		return option.get(id).getText();
 	}
-	public String getOptionNextScene(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getNextScene(optionID);
+	public String getOptionNextScene(int id){
+		return option.get(id).getNextScene();
 	}
-	public int getOptionLove(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getOptionLove(optionID);
+	public int getOptionLove(int id){
+		return option.get(id).getLove();
 	}
-	public int getOptionAngry(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getOptionAngry(optionID);
+	public int getOptionAffinity(int id){
+		return option.get(id).getAffinity();
 	}
-	public int getOptionSadness(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getOptionSadness(optionID);
+	public int getOptionObol(int id){
+		return option.get(id).getObol();
 	}
-	public int getOptionAffinity(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getOptionAffinity(optionID);
+	public int getOptionSadness(int id){
+		return option.get(id).getSadness();
 	}
-	public int getOptionObol(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getOptionObol(optionID);
+	public int getOptionAnger(int id){
+		return option.get(id).getAnger();
 	}
 }

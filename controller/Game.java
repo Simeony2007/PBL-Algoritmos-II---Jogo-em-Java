@@ -37,10 +37,13 @@ public class Game{
 
 	public void createGameChapters(){
 		
-		for(int i = 0; i < 2; i++){
+		for(int i = 0; i < 2; i++){ // DOIS CAPÍTULOS SÓ PRA INÍCIO!
 			Chapter j = new Chapter();
 			addChapter(j);
 		}
+
+		Chapter capituloRodandoAgora = nextChapter();
+		capituloRodandoAgora.addScene();
 
 	}
 
