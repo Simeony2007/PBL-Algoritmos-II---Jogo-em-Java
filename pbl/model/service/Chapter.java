@@ -26,6 +26,13 @@ public class Chapter {
         return null;
 	}
 
+	public String getScene(int index) {
+		if (index >= 0 && index < arrayScenes.size()) {
+			return arrayScenes.get(index).getId();
+		}
+		return null;
+	}
+
 	@Override
     public String toString() {
         return String.format(title);

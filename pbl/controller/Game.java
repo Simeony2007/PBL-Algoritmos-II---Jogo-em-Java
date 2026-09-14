@@ -1,6 +1,7 @@
 package pbl.controller;
 
 import java.util.ArrayList;
+
 import pbl.model.repository.*;
 import pbl.model.service.*;
 
@@ -50,6 +51,23 @@ public class Game{
 			Scene nextScene = selectedOption.getNextScene();
 			if (nextScene != null) {
 				currentSceneId = nextScene.getId();
+			}
+		}
+	}
+	
+	public void nextScene(){
+		Scene currentScene = chapter.getScene(currentSceneId);
+		if (currentScene.getOption(0) == null) {
+			if (currentScene.nextScene() != null) {
+				currentSceneId = currentScene.nextScene().getId();
+			}
+			else {
+				currentChapter++;
+				getChapter();
+				currentSceneId = chapter.getScene(0);
+				if (currentSceneId == null) {
+					// Fim do jogo;
+				}
 			}
 		}
 	}
