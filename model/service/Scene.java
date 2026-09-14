@@ -13,9 +13,21 @@ public class Scene{
 	public ArrayList<Dialogue> getDialogue(){
 		return dialogue;
 	}
+	public void addDialogue(String text){
+		Dialogue newDialogue = new Dialogue(text);
+		dialogue.add(text);
+	}
+
+	public void addDialogueWOption(String text, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
+		Dialogue newDialogue = new Dialogue(text);
+		newDialogue.addOption(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity);
+		dialogue.add(text);
+	}
 
 	// --------------- Funções de Dialogue ------------------
-
+	public void addOption(int id, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
+		dialogue.get(id).addOption(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity)
+	}
 	public String getText(int id){
 		return dialogue.get(id).getText();
 	}
@@ -42,19 +54,25 @@ public class Scene{
 	}
 
 	// --------- Funções de Options ----------
-	public int getOptionLoveChange(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getLoveChange(optionID);
+	public String getOptionText(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getText(optionID);
 	}
-	public int getOptionAngryChange(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getAngryChange(optionID);
+	public String getOptionNextScene(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getNextScene(optionID);
 	}
-	public int getOptionSadnessChange(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getSadnessChange(optionID);
+	public int getOptionLove(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getOptionLove(optionID);
 	}
-	public int getOptionRouteChange(int dialogueId, int optionID){
-		return dialogue.get(dialogueId).getRouteChange(optionID);
+	public int getOptionAngry(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getOptionAngry(optionID);
 	}
-
-
-
+	public int getOptionSadness(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getOptionSadness(optionID);
+	}
+	public int getOptionAffinity(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getOptionAffinity(optionID);
+	}
+	public int getOptionObol(int dialogueId, int optionID){
+		return dialogue.get(dialogueId).getOptionObol(optionID);
+	}
 }

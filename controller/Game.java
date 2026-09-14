@@ -1,5 +1,7 @@
 package model.service;
 import java.util.ArrayList;
+
+import model.service.Chapter;
 import view.GameInterface;
 
 public class Game{
@@ -33,6 +35,13 @@ public class Game{
 		return capitulos.get(capituloAtual++);
 	}
 
-	
+	public void createGameChapters(){
+		
+		for(int i = 0; i < 2; i++){
+			Chapter j = new Chapter();
+			addChapter(j);
+		}
+
+	}
 
 }

@@ -5,6 +5,7 @@ public class Chapter {
 	// Atributos
 	private String title;
 	private ArrayList<Scene> scenes = new ArrayList<>();
+	private currentScene = 0;
 
 	public Chapter(String title){
 		this.title = title;
@@ -22,6 +23,15 @@ public class Chapter {
 		scenes.add(scene);
 	}
 
+	public void addScene(){
+		Scene newScene = new Scene();
+		scenes.add(newScene);
+	}
+
+	public Scene getCurrentScene(){
+		return scenes.get(currentScene);
+	}
+	
 	public Scene getScene(int id){
 		return scenes.get(id);
 	}
