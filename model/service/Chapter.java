@@ -15,50 +15,56 @@ public class Chapter {
 		return title;
 	}
 
-	public ArrayList<Scene> getScene(){
-		return scenes;
-	}
-
-	public void addScene(Scene scene){
-		scenes.add(scene);
-	}
-
 	public void addScene(){
 		Scene newScene = new Scene();
-		
 		scenes.add(newScene);
 	}
 
-	public Scene getCurrentScene(){
-		return scenes.get(currentScene);
-	}
-	
-	public Scene getScene(int id){
-		return scenes.get(id);
-	}
-
-
 	// ------------- Funções de Scene ----------------
 	public String nextDialogueText(int id){
-		return scenes.get(id).getText();
+		return scenes.get(id).nextDialogueText();
 	}
-	public ArrayList<Dialogue> getDialogue(){
-		return scenes.get(id).getDialogue();
-	}
-
-	// --------------- Funções de Dialogue ------------------
-
-	public String getText(int sceneId, int dialogueId){
-		return scenes.get(sceneId).getText(dialogueId);
+	public void addDialogue(int id, String text){
+		scenes.get(id).addDialogue(text);
 	}
 
-	public boolean optionExists(int sceneId, int dialogId){
-		return scenes.get(sceneId).optionExists(dialogId);
+	public void addOption(int id, String textOfOption, String nextScene, int nObol, int nLove, int nAnger, int nSadness, int nAffinity){
+		scenes.get(id).addOption(textOfOption, nextScene, nObol, nLove, nAnger, nSadness, nAffinity);
 	}
 
-	public String getOptionText(int sceneId, int dialogId){
-		return scenes.get(sceneId).getOptionText(dialogId);
-	}
+	// public void newNpc(int id, String name, int affinity){
+	//     scenes.get(id).newNpc(name, affinity);
+	//}
 
+	public boolean optionExists(int sceneId){
+		return scenes.get(sceneId).optionExists();
+	}
+	// public void newNpc(int sceneId, String name, int affinity){
+	//     scene.get(sceneId).newNpc(name, affinity);
+	//}
+
+	// --------- Funções de Options ----------
+
+	public String getOptionText(int sceneId, int optionId){
+		return scenes.get(sceneId).getText(optionId);
+	}
+	public String getOptionNextScene(int sceneId, int id){
+		return scenes.get(sceneId).getNextScene(optionId);
+	}
+	public int getOptionLove(int sceneId, int id){
+		return scenes.get(sceneId).getLove(optionId);
+	}
+	public int getOptionAffinity(int sceneId, int id){
+		return scenes.get(sceneId).getAffinity(optionId);
+	}
+	public int getOptionObol(int sceneId, int id){
+		return scenes.get(sceneId).getObol(optionId);
+	}
+	public int getOptionSadness(int sceneId, int id){
+		return scenes.get(sceneId).getSadness(optionId);
+	}
+	public int getOptionAnger(int sceneId, int id){
+		return scenes.get(sceneId).getAnger(optionId);
+	}
 	
 }
