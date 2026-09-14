@@ -1,17 +1,22 @@
 package view;
+import java.util.Scanner;
 
 public class GameInterface{
-	private String text;
+	private Scanner scanner = new Scanner(System.in);
 
-	public Interface(String text){
-		this.text = text;
+	public int getNumberInput(){
+		return scanner.nextInt();
 	}
 
-	public String getText(){
-		return this.text;
+	public String getTextInput(){
+		return scanner.nextLine();
+	}
+	
+	public void showTextLn(String text){
+		System.out.println(text);
 	}
 
-	public void setText(String text){
-		this.text = text;
+	public void showText(String text){
+		System.out.print(text);
 	}
 }
