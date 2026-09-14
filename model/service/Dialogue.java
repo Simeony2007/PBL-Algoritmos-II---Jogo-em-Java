@@ -3,36 +3,30 @@ import java.util.ArrayList;
 
 public class Dialogue{
 
-	// Texto da fala
+	// Atributos
 	private String text;
-	private ArrayList<Option> option;
+	private ArrayList<Option> option = new ArrayList<>();
 
 	public Dialogue(String text){
-		this.option = new ArrayList<>();
 		this.text = text;
 	}
 
-	// Retorna o text guardado no atributo
-	public String getTexto(){
-		return this.text;
+	public String getText(){
+		return text;
 	}
 
-	// Adiciona um novo texto
-	public void	setTexto(String newText){
+	public void	setText(String newText){
 		text = newText;
 	}
 
-	// Retorna o objeto escolha
 	public ArrayList<Option> getOption(){
-		return this.option;
+		return option;
 	}
 
-	// Retorna se existe escolha
 	public boolean optionExists(){
-		return this.option.size() > 0;
+		return option.size() > 0;
 	}
 
-	// Pegar o texto de todas as escolhas
 	public String getOptionText(){
 		String text;
 		for (int i = 0; i < option.size() ; i++) {
@@ -41,13 +35,12 @@ public class Dialogue{
 		return text;
 	}
 
-	// Texto de uma escolha específica
 	public String getOptionText(int id){
 		return option.get(id).getTexto();
 	}
 
 
-	// Funções de Escolhas
+	// --------- Funções de Options ----------
 	public int getOptionLoveChange(int id){
 		return option.get(id).getLoveChange();
 	}
