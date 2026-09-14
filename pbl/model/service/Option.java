@@ -2,7 +2,7 @@ package pbl.model.service;
 
 public class Option {
     private String text;
-    private String nextScene;
+    private Scene nextScene;
     private int obol;
     private int love;
     private int anger;
@@ -10,7 +10,7 @@ public class Option {
     private int affinity;
 
 
-    public Option(String text, String nextScene, int obol, int love, int anger, int sadness, int affinity) {
+    public Option(String text, Scene nextScene, int obol, int love, int anger, int sadness, int affinity) {
         this.text = text;
         this.nextScene = nextScene;
         this.obol = obol;
@@ -24,7 +24,7 @@ public class Option {
         return text;
     }
 
-    public String getNextScene() {
+    public Scene getNextScene() {
         return nextScene;
     }
 

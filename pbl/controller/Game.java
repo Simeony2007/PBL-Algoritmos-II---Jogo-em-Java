@@ -1,50 +1,56 @@
 package pbl.controller;
-import java.util.ArrayList;
 
-import pbl.model.service*;
-import pbl.view.GameInterface;
+import java.util.ArrayList;
+import pbl.model.repository.*;
+import pbl.model.service.*;
 
 public class Game{
-	private Orfeu protagonista;
+	private Orfeu orfeu;
 	private ArrayList<Npc> npcs = new ArrayList<>();
-	private ArrayList<Chapter> capitulos = new ArrayList<>();
-	private int capituloAtual = 0;
+	private Chapter chapter;
+	private int currentChapter = 1;
+	private String currentSceneId;
 
 
-	public Game(int obol, int love, int anger, int sadness){
-		protagonista = new Orfeu(obol, love, anger, sadness);
+	public Game(){
+		npcs = StoryBuilder.GetNpcs(npcs);
+		orfeu = StoryBuilder.GetOrfeu(orfeu);
+		chapter = StoryBuilder.getChapter(currentChapter);
 	}
 
-	public Orfeu getProtagonista(){
-		return protagonista;
+	public void getChapter(){
+		chapter = StoryBuilder.getChapter(currentChapter);
 	}
 
-	public ArrayList<Npc> getNpcs(){
-		return npcs;
+	public String getDialogues() {
+		return chapter.getScene(chapter.getScene(currentSceneId).getId()).getDialogues();
 	}
 
-	public void addNpc(Npc npc){
-		npcs.add(npc);
+	public String getOptions() {
+		return chapter.getScene(chapter.getScene(currentSceneId).getId()).getOptionsText();
 	}
 
-	public void addChapter(Chapter chapter){
-		capitulos.add(chapter);
-	}
+	public void applyOptionEffects(int optionIndex) {
+		Scene currentScene = chapter.getScene(currentSceneId);
+		Option selectedOption = currentScene.getOption(optionIndex - 1);
 
-	public Chapter nextChapter(){
-		return capitulos.get(capituloAtual++);
-	}
+		if (selectedOption != null) {
+			orfeu.modifyObol(selectedOption.getObol());
+			orfeu.modifyLove(selectedOption.getLove());
+			orfeu.modifyAnger(selectedOption.getAnger());
+			orfeu.modifySadness(selectedOption.getSadness());
 
-	public void createGameChapters(){
-		
-		for(int i = 0; i < 2; i++){ // DOIS CAPÍTULOS SÓ PRA INÍCIO!
-			Chapter j = new Chapter();
-			addChapter(j);
+			// Apply effects to Npc if present
+			Npc currentNpc = currentScene.getNpc();
+			if (currentNpc != null) {
+				currentNpc.modifyAffinity(selectedOption.getAffinity());
+			}
+
+			// Move to the next scene
+			Scene nextScene = selectedOption.getNextScene();
+			if (nextScene != null) {
+				currentSceneId = nextScene.getId();
+			}
 		}
-
-		Chapter capituloRodandoAgora = nextChapter();
-		capituloRodandoAgora.addScene();
-
 	}
-
 }
