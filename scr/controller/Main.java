@@ -1,4 +1,4 @@
-package pbl.controller;
+package scr.controller;
 public class Main{
 	public static void main(String[] args) {
 		

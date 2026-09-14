@@ -1,9 +1,9 @@
-package pbl.controller;
+package scr.controller;
 
 import java.util.ArrayList;
 
-import pbl.model.repository.*;
-import pbl.model.service.*;
+import scr.model.repository.*;
+import scr.model.service.*;
 
 public class Game{
 	private Orfeu orfeu;

@@ -1,4 +1,4 @@
-package pbl.view;
+package scr.view;
 // package view;
 // import java.util.Scanner;
 

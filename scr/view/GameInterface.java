@@ -1,4 +1,4 @@
-package pbl.view;
+package scr.view;
 import java.util.Scanner;
 
 public class GameInterface{

@@ -1,6 +1,6 @@
-package pbl.model.repository;
+package scr.model.repository;
 
-import pbl.model.service.*;
+import scr.model.service.*;
 import java.util.ArrayList;
 
 public class StoryBuilder {
