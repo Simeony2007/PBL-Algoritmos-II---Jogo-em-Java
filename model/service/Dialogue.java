@@ -5,10 +5,10 @@ public class Dialogue{
 
 	// Texto da fala
 	private String text;
-	private ArrayList<Choice> choices;
+	private ArrayList<Option> option;
 
 	public Dialogue(String text){
-		this.choices = new ArrayList<>();
+		this.option = new ArrayList<>();
 		this.text = text;
 	}
 
@@ -23,41 +23,41 @@ public class Dialogue{
 	}
 
 	// Retorna o objeto escolha
-	public ArrayList<Choice> getChoices(){
-		return this.choices;
+	public ArrayList<Option> getOption(){
+		return this.option;
 	}
 
 	// Retorna se existe escolha
-	public boolean choiceExists(){
-		return this.choices.size() > 0;
+	public boolean optionExists(){
+		return this.option.size() > 0;
 	}
 
 	// Pegar o texto de todas as escolhas
-	public String getChoiceText(){
+	public String getOptionText(){
 		String text;
-		for (int i = 0; i < choices.size() ; i++) {
-			text = choices.get(i) + "\n";
+		for (int i = 0; i < option.size() ; i++) {
+			text = option.get(i) + "\n";
 		}
 		return text;
 	}
 
 	// Texto de uma escolha específica
-	public String getChoiceText(int id){
-		return choices.get(id).getTexto();
+	public String getOptionText(int id){
+		return option.get(id).getTexto();
 	}
 
 
 	// Funções de Escolhas
-	public int getChoiceLoveChange(int id){
-		return choices.get(id).getLoveChange();
+	public int getOptionLoveChange(int id){
+		return option.get(id).getLoveChange();
 	}
-	public int getChoiceAngryChange(int id){
-		return choices.get(id).getAngryChange();
+	public int getOptionAngryChange(int id){
+		return option.get(id).getAngryChange();
 	}
-	public int getChoideSadnessChange(int id){
-		return choices.get(id).getSadnessChange();
+	public int getOptionSadnessChange(int id){
+		return option.get(id).getSadnessChange();
 	}
-	public int getChoiceRouteChange(int id){
-		return choices.get(id).getRouteChange();
+	public int getOptionRouteChange(int id){
+		return option.get(id).getRouteChange();
 	}
 }

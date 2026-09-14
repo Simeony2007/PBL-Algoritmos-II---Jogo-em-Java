@@ -2,7 +2,7 @@ public class Menu{
 	public String getOpcoes(){
 		continue
 	}
-	public Partida iniciarJogo(){
+	public Game iniciarJogo(){
 		continue
 	}
 	public boolean sairDoJogo(){

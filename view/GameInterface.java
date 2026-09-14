@@ -1,6 +1,6 @@
 package view;
 
-public class Interface{
+public class GameInterface{
 	private String text;
 
 	public Interface(String text){
