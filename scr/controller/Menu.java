@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 package scr.controller;
 import scr.controller.Game;
 import scr.view.GameInterface;
+=======
+package pbl.controller;
+import pbl.controller.Game;
+import pbl.view.GameInterface;
+>>>>>>> 794421f32fb7cc91d5c01385b574e945420d160e
 
 public class Menu {
     private String menuOptions = "1 - Iniciar jogo\n2 - Instruções\n3 - Créditos\n4 - Fechar jogo\n";
@@ -41,7 +47,11 @@ public class Menu {
         switch (optionNumber) {
             case 1:
                 game = new Game(/* Parametros iniciais */);
+<<<<<<< HEAD
                 game.gameRunning();
+=======
+                //game.executar(); // Dispara o loop da história do Game
+>>>>>>> 794421f32fb7cc91d5c01385b574e945420d160e
                 break;
             case 2:
                 gameInterface.showTextLn("Instruções do jogo...");
