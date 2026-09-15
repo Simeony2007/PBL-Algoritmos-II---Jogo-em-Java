@@ -7,6 +7,7 @@ public class Scene{
 	private ArrayList<Option> option = new ArrayList<>();
 	private Npc npc;
 	private Scene nextScene;
+	private StringBuilder sb = new StringBuilder();
 
 	public Scene(String id){
 		this.id = id;
@@ -19,7 +20,6 @@ public class Scene{
 	}
 
 	public void addDialogue(String text){
-		StringBuilder sb = new StringBuilder();
 		sb.append(text);
 		sb.append("\n");
 		this.dialogue = sb.toString();

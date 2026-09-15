@@ -1,9 +1,9 @@
 package scr.controller;
 
 import java.util.ArrayList;
-
 import scr.model.repository.*;
 import scr.model.service.*;
+import scr.view.GameInterface;
 
 public class Game{
 	private Orfeu orfeu;
@@ -11,12 +11,53 @@ public class Game{
 	private Chapter chapter;
 	private int currentChapter = 1;
 	private String currentSceneId;
-
+	private GameInterface gameInterface = new GameInterface();
 
 	public Game(){
 		npcs = StoryBuilder.GetNpcs(npcs);
 		orfeu = StoryBuilder.GetOrfeu(orfeu);
 		chapter = StoryBuilder.getChapter(currentChapter);
+	}
+
+	public void gameRunning(){
+		String newScene = "s1_introduction";
+		getChapter();
+		while (true) {
+			String chapterTitle = chapter.getTitle();
+			gameInterface.showTextLn(chapterTitle);
+			ArrayList<String> sceneScript = new ArrayList<>();
+			String genericString = "";
+
+			for (int i = 0; i < chapter.getScene(newScene).getDialogues().length(); i++) {
+				
+				char k = chapter.getScene(newScene).getDialogues().charAt(i);
+				
+				if (k != '\n') {
+					genericString += k;
+				}
+				else{
+					genericString += k;
+					sceneScript.add(genericString);
+					genericString = "";
+				}
+			}
+
+			for (int j = 0; j < sceneScript.size(); j++) {
+				gameInterface.showTextLn(sceneScript.get(j));	
+			}
+
+			gameInterface.showTextLn(chapter.getScene(newScene).getOptionsText());
+			int input = gameInterface.getNumberInput();
+			if(input == 1){
+				gameInterface.showTextLn("escolha1");
+			}else if(input == 2){
+				gameInterface.showTextLn("escolha2");
+			}else if(input == 3){
+				gameInterface.showTextLn("escolha2");
+			}
+			nextScene();
+			newScene = currentSceneId;
+		}
 	}
 
 	public void getChapter(){
