@@ -3,5 +3,23 @@ public class Npc{
 	private String name;
 	private int affinity;
 
+	// Construtor
+	public Npc(String npcName, int npcAffinity){
+		this.name = npcName;
+		this.affinity = npcAffinity;
+	}
+	// -----------
+
+	public String getName(){
+		return name;
+	}
+
+	public int getAffinity(){
+		return affinity;
+	}
+
+	public void changeAffinity(int value){
+		affinity += value;
+	}
 	
 }

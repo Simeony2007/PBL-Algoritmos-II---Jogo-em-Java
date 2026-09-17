@@ -2,13 +2,31 @@ package model.service;
 
 public class Choice{
 	private String text;
+	private String nextSceneId;
+	private int affinityChange;
 	private int loveChange;
 	private int angryChange;
 	private int sadnessChange;
-	private int routeChange;
+
+	public Choice(String text, String nextSceneId, int affinity, int love, int angry, int sadness){
+		this.text = text;
+		this.nextSceneId = nextSceneId;
+		this.affinityChange = affinity;
+		this.loveChange = love;
+		this.angryChange = angry;
+		this.sadnessChange = sadness;
+	}
 
 	public String getText(){
 		return this.text;
+	}
+
+	public String getNextSceneIdChoice(){
+		return nextSceneId;
+	}
+
+	public int getAffinityChange(){
+		return affinityChange;
 	}
 
 	public int getLoveChange(){
@@ -21,9 +39,5 @@ public class Choice{
 
 	public int getAngryChange(){
 		return angryChange;
-	}
-	
-	public int getRouteChange(){
-		return routeChange;
 	}
 }
