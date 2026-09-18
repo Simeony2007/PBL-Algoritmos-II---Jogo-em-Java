@@ -19,4 +19,8 @@ public class GameInterface{
 	public void showText(String text){
 		System.out.print(text);
 	}
+
+	public void clearConsole(){
+		showText("\033[H\033[2J");
+	}
 }

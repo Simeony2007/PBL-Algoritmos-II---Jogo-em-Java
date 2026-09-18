@@ -50,6 +50,7 @@ public class Menu {
     }
 
     public void optionScanner(int optionNumber) {
+        clearConsole();
         switch (optionNumber) {
             case 1:
                 game = new Game(0, 0, 0, 0);
@@ -68,5 +69,9 @@ public class Menu {
                 showTextLn("Erro inesperado...");               
                 break;
         }
+        clearConsole();
     }
+    public void clearConsole(){
+		gameInterface.clearConsole();
+	}
 }

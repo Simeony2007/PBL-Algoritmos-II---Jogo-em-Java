@@ -48,9 +48,9 @@ public class StoryBuilder {
 
         Scene scene1 = new Scene("s1_introduction");
         Scene scene2 = new Scene("s2_cerberus");
-        Scene scene2a = new Scene("s2a_cerberus");
-        Scene scene2b = new Scene("s2b_cerberus");
-        Scene scene2c = new Scene("s2c_cerberus");
+        Scene scene2a = new Scene("s2a_cerberus", "s3_river_styx");
+        Scene scene2b = new Scene("s2b_cerberus", "s3_river_styx");
+        Scene scene2c = new Scene("s2c_cerberus", "s3_river_styx");
         Scene scene3 = new Scene("s3_river_styx");
 
 
@@ -79,17 +79,17 @@ public class StoryBuilder {
         // Cenas 2a, 2b e 2c - Resultados das escolhas com o Cérbero
         scene2a.addNewDialogue("Os acordes suaves da lira ecoam como a brisa entre as folhas, fazendo o olhar furioso de Cérbero suavizar-se até que suas três cabeças desabem no chão de pedra em um sono profundo, permitindo que Orfeu se esgueire em direção às sombras do rio Aqueronte murmurando que o amor os guiará de volta.");
         //scene2a.setNextScene(scene3);
-        chapter.changeCurrentScene("s3_river_styx");
+        //chapter.changeCurrentScene("s3_river_styx");
 
 
         scene2b.addNewDialogue("As notas graves e melancólicas carregadas do peso de um luto insuportável fazem Cérbero soltar ganidos lúgubres pelas três bocas, chorando em sintonia com a dor do bardo enquanto este contorna o guardião cabisbaixo, determinado a transformar a própria tragédia no caminho para resgatar sua amada.");
         //scene2b.setNextScene(scene3);
-        chapter.changeCurrentScene("s3_river_styx");
+        //chapter.changeCurrentScene("s3_river_styx");
 
 
         scene2c.addNewDialogue("O dedilhado agressivo e vibrante ressoa como o estalo do trovão, intimidando a besta colossal que dá passos para trás e se curva em submissão involuntária, abrindo passagem para Orfeu avançar com passos firmes em direção às profundezas do reino dos mortos.");
         //scene2c.setNextScene(scene3);
-        chapter.changeCurrentScene("s3_river_styx");
+        //chapter.changeCurrentScene("s3_river_styx");
 
 
         // Cena 3 - Margem do Rio Estige
@@ -104,6 +104,24 @@ public class StoryBuilder {
         chapter.newScene(scene3);
 
 
+        return chapter;
+    }
+
+    public static Chapter BuildChapter2(){
+        Chapter chapter = new Chapter("Capítulo 2 - Teste");
+
+        Scene scene1 = new Scene("Teste");
+        Scene scene2 = new Scene("Teste2");
+
+        // Cena 1 - Introdução
+        scene1.addNewDialogue("A.");
+        
+        
+        scene2.addNewDialogue("B");
+        
+        chapter.newScene(scene1);
+        chapter.newScene(scene2);
+        
         return chapter;
     }
 }

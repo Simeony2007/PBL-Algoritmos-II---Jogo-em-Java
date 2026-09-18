@@ -6,9 +6,19 @@ public class Scene{
 	private ArrayList<Choice> choices = new ArrayList<>();
 	private String sceneId;
 	private int currentDialogueID = 0;
+	private String nextSceneId;
 
 	public Scene(String sceneIdText){
 		this.sceneId = sceneIdText;
+		this.nextSceneId = null;
+	}
+	public Scene(String sceneIdText, String nextSceneIdName){
+		this.sceneId = sceneIdText;
+		this.nextSceneId = nextSceneIdName;
+	}
+
+	public String getNextSceneId(){
+		return nextSceneId;
 	}
 
 	// Adding functions
@@ -59,7 +69,7 @@ public class Scene{
 	public String getChoicesText() {
 		String generic = "";
 		for (int i = 0; i < choices.size(); i++) {
-			generic += i + " - " + choices.get(i).getText() + "\n";
+			generic += i+1 + " - " + choices.get(i).getText() + "\n";
 		}
 
 		return generic;

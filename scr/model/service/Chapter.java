@@ -58,6 +58,10 @@ public class Chapter{
 
 	// Scenes functions
 
+	public String getNextSceneId(){
+		return scenes.get(currentScene).getNextSceneId();
+	}
+
 	public int choicesSize(){
 		return scenes.get(currentScene).choicesSize();
 	}

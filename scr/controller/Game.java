@@ -17,14 +17,15 @@ public class Game{
 	public void gameRunning(){
 
 		String currentTitle;
-		String nextSceneId;
+		String nextSceneId = null;
 		String npcAlvo = null;
 
 		addNewChapter(StoryBuilder.BuildChapter1());
+		addNewChapter(StoryBuilder.BuildChapter2());
 		for (Npc j : StoryBuilder.GetNpcs()) {
 			addNewNpc(j);
 		}
-
+		
 		while(!isTheChaptersFinished()){
 			currentTitle = getTitle();
 			showTextLn(currentTitle);
@@ -33,23 +34,29 @@ public class Game{
 				while(!isFinishedAllDialogues()){
 					npcAlvo = getNpcThatSaidIt();
 					showTextLn(nextDialogue());
+					littleStop(1000);
+					showTextLn("");
 				}
 				if (choicesSize() != 0) {
 					showTextLn(getChoicesText());
 					showText("\nEscolha uma opção: ");
 					int choiceId = getNumberInput();
 					nextSceneId = applyEffects(choiceId, npcAlvo);
-					nextSceneId = null;
-				}
-				else{
-					nextSceneId = null;
+					clearConsole();
+					showTextLn("Opção escolhida: " + (choiceId+1));
 				}
 				if(nextSceneId != null){
 					changeCurrentScene(nextSceneId);
 				}
 				else{
-					nextScene();
+					
+					if(getNextSceneId() != null){
+						changeCurrentScene(getNextSceneId());
+					}else{
+						nextScene();
+					}
 				}
+				nextSceneId = null;				
 			}
 			nextChapter();
 		}
@@ -57,8 +64,25 @@ public class Game{
 		showTextLn("Game Finished!");
 	}
 
+	// Pequena pausa - Feito por AI
+	public void littleStop(int milissegundos) {
+		try {
+			Thread.sleep(milissegundos);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	}
+
+	public void clearConsole(){
+		gameInterface.clearConsole();
+	}
+
 	public boolean isTheChaptersFinished(){
 		return currentChapter == capitulos.size();
+	}
+
+	public String getNextSceneId(){
+		return capitulos.get(currentChapter).getNextSceneId();
 	}
 
 	public void showTextLn(String text){
@@ -74,7 +98,7 @@ public class Game{
 	}
 
 	public boolean isInTheOptionLimit(int userInput){
-		return userInput < choicesSize() && userInput > 0;
+		return userInput-1 < choicesSize() && userInput > 0;
 	}
 
 	public int getNumberInput(){
@@ -85,7 +109,7 @@ public class Game{
 				String genericString = getTextInput();
 				generic = Integer.parseInt(genericString);
 				if(isInTheOptionLimit(generic)){
-					return generic;
+					return generic-1;
 				}
 				else{
 					showTextLn("\nDigite um número válido!\n");
