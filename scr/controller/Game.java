@@ -1,10 +1,11 @@
-package model;
+package scr.controller;
 import java.util.ArrayList;
 
-import model.service.Chapter;
-import model.service.Npc;
-import model.service.Orfeu;
-import view.GameInterface;
+import scr.model.service.Chapter;
+import scr.model.service.Npc;
+import scr.model.service.Orfeu;
+import scr.model.repository.StoryBuilder;
+import scr.view.GameInterface;
 
 public class Game{
 	private Orfeu protagonista;
@@ -13,12 +14,16 @@ public class Game{
 	private GameInterface gameInterface = new GameInterface();
 	private int currentChapter = 0;
 
-
-
 	public void gameRunning(){
 
 		String currentTitle;
 		String nextSceneId;
+		String npcAlvo = null;
+
+		addNewChapter(StoryBuilder.BuildChapter1());
+		for (Npc j : StoryBuilder.GetNpcs()) {
+			addNewNpc(j);
+		}
 
 		while(!isTheChaptersFinished()){
 			currentTitle = getTitle();
@@ -26,13 +31,19 @@ public class Game{
 
 			while(!isScenesFinished()){
 				while(!isFinishedAllDialogues()){
+					npcAlvo = getNpcThatSaidIt();
 					showTextLn(nextDialogue());
 				}
-				showTextLn(getChoicesText());
-				showText("\nEscolha uma opção: ");
-				int choiceId = getNumberInput();
-				nextSceneId = applyEffects(choiceId, getNpcThatSaidIt());
-
+				if (choicesSize() != 0) {
+					showTextLn(getChoicesText());
+					showText("\nEscolha uma opção: ");
+					int choiceId = getNumberInput();
+					nextSceneId = applyEffects(choiceId, npcAlvo);
+					nextSceneId = null;
+				}
+				else{
+					nextSceneId = null;
+				}
 				if(nextSceneId != null){
 					changeCurrentScene(nextSceneId);
 				}
@@ -63,7 +74,7 @@ public class Game{
 	}
 
 	public boolean isInTheOptionLimit(int userInput){
-		return userInput <= choicesSize() && userInput > 0;
+		return userInput < choicesSize() && userInput > 0;
 	}
 
 	public int getNumberInput(){
@@ -79,7 +90,7 @@ public class Game{
 				else{
 					showTextLn("\nDigite um número válido!\n");
 				}
-			}except(Exception e){
+			}catch(Exception e){
 				showTextLn("Digite um número válido!\n");
 			}
 		}
@@ -125,8 +136,12 @@ public class Game{
 		return capitulos.get(currentChapter).getSceneId();
 	}
 	
-	public void addNewNpc(String name, String description){
-		Npc generic = new Npc(name, description);
+	public void addNewNpc(String name, int affinity){
+		Npc generic = new Npc(name, affinity);
+		npcs.add(generic);
+	}
+
+	public void addNewNpc(Npc generic){
 		npcs.add(generic);
 	}
 
@@ -148,6 +163,10 @@ public class Game{
 		capitulos.add(generic);
 	}
 
+	public void addNewChapter(Chapter newChapter){
+		capitulos.add(newChapter);
+	}
+
 	// Scene functions
 	public void newScene(int chapterId){
 		capitulos.get(chapterId).newScene();
@@ -157,8 +176,8 @@ public class Game{
 		capitulos.get(chapterId).addNewDialogue(sceneId, textOfDialogue, npcName);
 	}
 
-	public void addNewChoice(int chapterId, int sceneId, String text, String nextSceneId, int affinity, int love, int angry, int sadness){
-		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, affinity, love, angry, sadness);
+	public void addNewChoice(int chapterId, int sceneId, String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
+		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, obol, affinity, love, angry, sadness);
 	}
 
 	public void nextScene(){
@@ -190,11 +209,11 @@ public class Game{
 		return capitulos.get(currentChapter).getChoicesText();
 	}
 
-	public int getText(int id){
+	public String getText(int id){
 		return capitulos.get(currentChapter).getText(id);
 	}
 
-	public int getNextSceneIdChoice(int id){
+	public String getNextSceneIdChoice(int id){
 		return capitulos.get(currentChapter).getNextSceneIdChoice(id);
 	}
 

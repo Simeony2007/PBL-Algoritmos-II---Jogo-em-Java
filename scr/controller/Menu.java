@@ -1,6 +1,6 @@
-package pbl.controller;
-import pbl.controller.Game;
-import pbl.view.GameInterface;
+package scr.controller;
+import scr.controller.Game;
+import scr.view.GameInterface;
 
 public class Menu {
     private String menuOptions = "1 - Iniciar jogo\n2 - Instruções\n3 - Créditos\n4 - Fechar jogo\n";
@@ -15,7 +15,7 @@ public class Menu {
     public void iniciar() {
         int opcao = 0;
         while (opcao != 4) {
-			showTextLn(getOptions());
+			//showTextLn(getOptions());
             opcao = inputOptions();
             optionScanner(opcao);
         }
@@ -52,7 +52,7 @@ public class Menu {
     public void optionScanner(int optionNumber) {
         switch (optionNumber) {
             case 1:
-                game = new Game();
+                game = new Game(0, 0, 0, 0);
 				game.gameRunning();
                 break;
             case 2:

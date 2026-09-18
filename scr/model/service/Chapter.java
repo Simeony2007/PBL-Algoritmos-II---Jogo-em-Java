@@ -1,4 +1,4 @@
-package model.service;
+package scr.model.service;
 import java.util.ArrayList;
 
 public class Chapter{
@@ -14,16 +14,20 @@ public class Chapter{
 
 	// Adding functions
 	public void newScene(){
-		Scene generic = new Scene()
+		Scene generic = new Scene(null);
 		scenes.add(generic);
+	}
+
+	public void newScene(Scene scene){
+		scenes.add(scene);
 	}
 
 	public void addNewDialogue(int id, String textOfDialogue, String npcName){
 		scenes.get(id).addNewDialogue(textOfDialogue, npcName);
 	}
 
-	public void addNewChoice(int id, String text, String nextSceneId, int affinity, int love, int angry, int sadness){
-		scenes.get(id).addNewChoice(text, nextSceneId, affinity, love, angry, sadness);
+	public void addNewChoice(int id, String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
+		scenes.get(id).addNewChoice(text, nextSceneId, obol, affinity, love, angry, sadness);
 	}
 	// -----------------------------------
 
@@ -79,16 +83,16 @@ public class Chapter{
 	}
 
 	// Choices functions
-	public String getChoicesText(){
-		return scenes.get(currentScene).getChoicesText();
-	}
-
-	public int getText(int id){
+	public String getText(int id){
 		return scenes.get(currentScene).getText(id);
 	}
 
-	public int getNextSceneIdChoice(int id){
+	public String getNextSceneIdChoice(int id){
 		return scenes.get(currentScene).getNextSceneIdChoice(id);
+	}
+
+	public int getObolChange(int id){
+		return scenes.get(currentScene).getObolChange(id);
 	}
 
 	public int getAffinityChange(int id){

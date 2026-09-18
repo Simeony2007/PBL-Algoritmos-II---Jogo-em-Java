@@ -1,16 +1,18 @@
-package model.service;
+package scr.model.service;
 
 public class Choice{
 	private String text;
 	private String nextSceneId;
+	private int obolChange;
 	private int affinityChange;
 	private int loveChange;
 	private int angryChange;
 	private int sadnessChange;
 
-	public Choice(String text, String nextSceneId, int affinity, int love, int angry, int sadness){
+	public Choice(String text, String nextSceneId,int obol, int affinity, int love, int angry, int sadness){
 		this.text = text;
 		this.nextSceneId = nextSceneId;
+		this.obolChange = obol;
 		this.affinityChange = affinity;
 		this.loveChange = love;
 		this.angryChange = angry;
@@ -23,6 +25,10 @@ public class Choice{
 
 	public String getNextSceneIdChoice(){
 		return nextSceneId;
+	}
+
+	public int getObolChange(){
+		return obolChange;
 	}
 
 	public int getAffinityChange(){

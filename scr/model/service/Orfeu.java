@@ -1,4 +1,4 @@
-package model.service;
+package scr.model.service;
 
 public class Orfeu{
 	private int obol;

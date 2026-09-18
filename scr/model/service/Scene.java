@@ -1,4 +1,4 @@
-package model.service;
+package scr.model.service;
 import java.util.ArrayList;
 
 public class Scene{
@@ -21,8 +21,8 @@ public class Scene{
 		dialogues.add(generic);
 	}
 
-	public void addNewChoice(String text, String nextSceneId, int affinity, int love, int angry, int sadness){
-		Choice generic = new Choice(text, nextSceneId, affinity, love, angry, sadness);
+	public void addNewChoice(String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
+		Choice generic = new Choice(text, nextSceneId, obol, affinity, love, angry, sadness);
 		choices.add(generic);
 	}
 
@@ -40,7 +40,7 @@ public class Scene{
 	}
 
 	public String getCurrentDialogueText(){
-		return dialogues.get(currentDialogueID);
+		return dialogues.get(currentDialogueID).getTexto();
 	}
 
 	public String getNpcThatSaidIt(){
@@ -53,24 +53,27 @@ public class Scene{
 	 * @return String: O texto do diálogo.
 	 */
 	public String nextDialogue(){
-		return dialogues.get(currentDialogueID++);
+		return dialogues.get(currentDialogueID++).getTexto();
 	}
 
 	public String getChoicesText() {
 		String generic = "";
 		for (int i = 0; i < choices.size(); i++) {
-			generic += ("%d", i) + choices.get(i).getText() + "\n";
+			generic += i + " - " + choices.get(i).getText() + "\n";
 		}
 
 		return generic;
 	}
 
 	// Funções de Escolhas
-	public int getText(int id){
+	public String getText(int id){
 		return choices.get(id).getText();
 	}
-	public int getNextSceneIdChoice(int id){
+	public String getNextSceneIdChoice(int id){
 		return choices.get(id).getNextSceneIdChoice();
+	}
+	public int getObolChange(int id){
+		return choices.get(id).getObolChange();
 	}
 	public int getAffinityChange(int id){
 		return choices.get(id).getAffinityChange();
