@@ -32,7 +32,6 @@ public class Game{
 
 			while(!isScenesFinished()){
 				while(!isFinishedAllDialogues()){
-					npcAlvo = getNpcThatSaidIt();
 					showTextLn(nextDialogue());
 					littleStop(1000);
 					showTextLn("");
@@ -41,6 +40,7 @@ public class Game{
 					showTextLn(getChoicesText());
 					showText("\nEscolha uma opção: ");
 					int choiceId = getNumberInput();
+					npcAlvo = getNpcInChoice(choiceId);
 					nextSceneId = applyEffects(choiceId, npcAlvo);
 					clearConsole();
 					showTextLn("Opção escolhida: " + (choiceId+1));
@@ -58,6 +58,19 @@ public class Game{
 				}
 				nextSceneId = null;				
 			}
+			
+			// Debugger para teste se está mudando os atributos
+			// do personagem e dos npcs!
+			//
+			// for (Npc l: npcs) {
+			// 	showTextLn(l.getName());
+			// 	showTextLn(String.valueOf(l.getAffinity()));
+			// }
+			// showTextLn("\nObol: " + String.valueOf(protagonista.getObol()));
+			// showTextLn("Anger: " + String.valueOf(protagonista.getAnger()));
+			// showTextLn("Sadness: " + String.valueOf(protagonista.getSadness()));
+			// showTextLn("Love: " + String.valueOf(protagonista.getLove()));
+			
 			nextChapter();
 		}
 
@@ -204,6 +217,10 @@ public class Game{
 		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, obol, affinity, love, angry, sadness);
 	}
 
+	public void addNewChoice(int chapterId, int sceneId, String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
+		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
+	}
+
 	public void nextScene(){
 		capitulos.get(currentChapter).nextScene();
 	}
@@ -239,6 +256,10 @@ public class Game{
 
 	public String getNextSceneIdChoice(int id){
 		return capitulos.get(currentChapter).getNextSceneIdChoice(id);
+	}
+
+	public String getNpcInChoice(int id){
+		return capitulos.get(currentChapter).getNpcInChoice(id);
 	}
 
 	public int getAffinityChange(int id){

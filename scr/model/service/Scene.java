@@ -36,6 +36,11 @@ public class Scene{
 		choices.add(generic);
 	}
 
+	public void addNewChoice(String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
+		Choice generic = new Choice(text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
+		choices.add(generic);
+	}
+
 	public String getSceneId() {
 		return sceneId;
 	}
@@ -81,6 +86,9 @@ public class Scene{
 	}
 	public String getNextSceneIdChoice(int id){
 		return choices.get(id).getNextSceneIdChoice();
+	}
+	public String getNpcInChoice(int id){
+		return choices.get(id).getNpcInChoice();
 	}
 	public int getObolChange(int id){
 		return choices.get(id).getObolChange();

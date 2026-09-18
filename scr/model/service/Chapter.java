@@ -29,6 +29,10 @@ public class Chapter{
 	public void addNewChoice(int id, String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
 		scenes.get(id).addNewChoice(text, nextSceneId, obol, affinity, love, angry, sadness);
 	}
+
+	public void addNewChoice(int id, String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
+		scenes.get(id).addNewChoice(text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
+	}
 	// -----------------------------------
 
 	public String getTitle(){
@@ -93,6 +97,10 @@ public class Chapter{
 
 	public String getNextSceneIdChoice(int id){
 		return scenes.get(currentScene).getNextSceneIdChoice(id);
+	}
+
+	public String getNpcInChoice(int id){
+		return scenes.get(currentScene).getNpcInChoice(id);
 	}
 
 	public int getObolChange(int id){
