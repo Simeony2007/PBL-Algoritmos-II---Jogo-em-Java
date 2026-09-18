@@ -12,6 +12,10 @@ public class Dialogue{
 		this.text = text;
 		this.npcThatSaidIt = npcName;
 	}
+	public Dialogue(String text){
+		this.text = text;
+		this.npcThatSaidIt = null;
+	}
 
 	public String getDialogueId(){
 		return this.dialogueId;
@@ -19,7 +23,14 @@ public class Dialogue{
 
 	// Retorna o text guardado no atributo
 	public String getTexto(){
-		return this.text;
+		
+		if(npcThatSaidIt == null){
+			return this.text;
+		}else{
+			return npcThatSaidIt + ": " + this.text;
+		}
+		
+		
 	}
 
 	public String getNpcThatSaidIt(){

@@ -4,11 +4,20 @@ import java.util.ArrayList;
 public class Scene{
 	private ArrayList<Dialogue> dialogues = new ArrayList<>();
 	private ArrayList<Choice> choices = new ArrayList<>();
+	private String sceneId;
 	private int currentDialogueID = 0;
+
+	public Scene(String sceneIdText){
+		this.sceneId = sceneIdText;
+	}
 
 	// Adding functions
 	public void addNewDialogue(String textOfDialogue, String npcName){
 		Dialogue generic = new Dialogue(textOfDialogue, npcName);
+		dialogues.add(generic);
+	}
+	public void addNewDialogue(String textOfDialogue){
+		Dialogue generic = new Dialogue(textOfDialogue);
 		dialogues.add(generic);
 	}
 
@@ -17,9 +26,17 @@ public class Scene{
 		choices.add(generic);
 	}
 
+	public String getSceneId() {
+		return sceneId;
+	}
+
 	// ---------------------------
 	public boolean isFinishedAllDialogues(){
 		return currentDialogueID == dialogues.size();
+	}
+
+	public int choicesSize(){
+		return choices.size();
 	}
 
 	public String getCurrentDialogueText(){
@@ -64,7 +81,7 @@ public class Scene{
 	public int getChoiceAngryChange(int id){
 		return choices.get(id).getAngryChange();
 	}
-	public int getChoideSadnessChange(int id){
+	public int getChoiceSadnessChange(int id){
 		return choices.get(id).getSadnessChange();
 	}
 }

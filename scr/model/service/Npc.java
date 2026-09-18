@@ -13,11 +13,9 @@ public class Npc{
 	public String getName(){
 		return name;
 	}
-
 	public int getAffinity(){
 		return affinity;
 	}
-
 	public void changeAffinity(int value){
 		affinity += value;
 	}

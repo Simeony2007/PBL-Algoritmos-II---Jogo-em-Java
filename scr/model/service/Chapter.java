@@ -5,7 +5,6 @@ public class Chapter{
 	private ArrayList<Scene> scenes = new ArrayList<>();
 	private String title;
 	private int currentScene = 0;
-	private int totalOfScenes = 0;
 
 	// Construtor
 	public Chapter(String titleText){
@@ -28,11 +27,37 @@ public class Chapter{
 	}
 	// -----------------------------------
 
+	public String getTitle(){
+		return title;
+	}
+
+	public void changeCurrentScene(String sceneId){
+		for (Scene i : scenes) {
+			if (i.getSceneId().equals(sceneId)) {
+				currentScene = scenes.indexOf(i);
+			}
+		}
+	}
+
+	public String getSceneId() {
+		return scenes.get(currentScene).getSceneId();
+	}
+
+
+	public void nextScene(){
+		currentScene++;
+	}
+
 	public boolean isScenesFinished(){
-		return currentScene == totalOfScenes;
+		return currentScene == scenes.size();
 	}
 
 	// Scenes functions
+
+	public int choicesSize(){
+		return scenes.get(currentScene).choicesSize();
+	}
+
 	public String getChoicesText(){
 		return scenes.get(currentScene).getChoicesText();
 	}
@@ -78,8 +103,8 @@ public class Chapter{
 		return scenes.get(currentScene).getChoiceAngryChange(id);
 	}
 
-	public int getChoideSadnessChange(int id){
-		return scenes.get(currentScene).getChoideSadnessChange(id);
+	public int getChoiceSadnessChange(int id){
+		return scenes.get(currentScene).getChoiceSadnessChange(id);
 	}
 
 
