@@ -27,10 +27,10 @@ public class StoryBuilder {
         return (npcs);
     }
 
-    public static Orfeu GetOrfeu(){
-        Orfeu orfeu = new Orfeu(1, 3, 3, 3);
-        return orfeu;
-    }
+    // public static Orfeu GetOrfeu(){
+    //     Orfeu orfeu = new Orfeu(1, 3, 3, 3);
+    //     return orfeu;
+    // }
 
 
     // public static Chapter getChapter(int index){
