@@ -22,6 +22,14 @@ public class Game{
 
 		addNewChapter(StoryBuilder.BuildChapter1());
 		addNewChapter(StoryBuilder.BuildChapter2());
+		addNewChapter(StoryBuilder.BuildChapter3());
+		addNewChapter(StoryBuilder.BuildChapter4());
+		addNewChapter(StoryBuilder.BuildChapter5());
+		addNewChapter(StoryBuilder.BuildChapter6());
+		addNewChapter(StoryBuilder.BuildChapter7());
+		addNewChapter(StoryBuilder.BuildChapter8());
+		addNewChapter(StoryBuilder.BuildChapter9());
+		addNewChapter(StoryBuilder.BuildChapter10());
 		for (Npc j : StoryBuilder.GetNpcs()) {
 			addNewNpc(j);
 		}
@@ -33,7 +41,7 @@ public class Game{
 			while(!isScenesFinished()){
 				while(!isFinishedAllDialogues()){
 					showTextLn(nextDialogue());
-					littleStop(1000);
+					littleStop(1);
 					showTextLn("");
 				}
 				if (choicesSize() != 0) {
