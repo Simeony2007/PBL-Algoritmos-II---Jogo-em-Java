@@ -8,42 +8,35 @@ import scr.model.repository.StoryBuilder;
 import scr.view.GameInterface;
 
 public class Game{
-	private Orfeu protagonista;
+	private Orfeu orfeu;
 	private ArrayList<Npc> npcs = new ArrayList<>();
-	private ArrayList<Chapter> capitulos = new ArrayList<>();
+	private ArrayList<Chapter> chapters = new ArrayList<>();
 	private GameInterface gameInterface = new GameInterface();
 	private int currentChapter = 0;
+	private boolean isGameRunning = true;
 
 	public void gameRunning(){
-
 		String currentTitle;
 		String nextSceneId = null;
 		String npcAlvo = null;
-
 		
-		addNewChapter(StoryBuilder.BuildChapterTest());
-		addNewChapter(StoryBuilder.BuildChapter1());
-		addNewChapter(StoryBuilder.BuildChapter2());
-		addNewChapter(StoryBuilder.BuildChapter3());
-		addNewChapter(StoryBuilder.BuildChapter4());
-		addNewChapter(StoryBuilder.BuildChapter5());
-		addNewChapter(StoryBuilder.BuildChapter6());
-		addNewChapter(StoryBuilder.BuildChapter7());
-		addNewChapter(StoryBuilder.BuildChapter8());
-		addNewChapter(StoryBuilder.BuildChapter9());
-		addNewChapter(StoryBuilder.BuildChapter10());
+		orfeu = StoryBuilder.getOrfeu();
+		npcs = StoryBuilder.GetNpcs();
+		chapters = StoryBuilder.getChapters();
+
+
 		for (Npc j : StoryBuilder.GetNpcs()) {
 			addNewNpc(j);
 		}
 		
-		while(!isTheChaptersFinished()){
+		while(isGameRunning()){
 			currentTitle = getTitle();
 			showTextLn(currentTitle);
 
 			while(!isScenesFinished()){
 				while(!isFinishedAllDialogues()){
 					showTextLn(nextDialogue());
-					littleStop(1);
+					littleStop(10);
 					showTextLn("");
 				}
 				if (choicesSize() != 0) {
@@ -53,7 +46,6 @@ public class Game{
 					npcAlvo = getNpcInChoice(choiceId);
 					nextSceneId = applyEffects(choiceId, npcAlvo);
 					clearConsole();
-					showTextLn("Opção escolhida: " + (choiceId+1));
 				}else{
 					if(nextSceneByAttributes() != null && getType() != null && getType().length > 0){
 						String genericScene;
@@ -71,29 +63,22 @@ public class Game{
 					changeCurrentScene(nextSceneId);
 				}
 				else{
-					
 					if(getNextSceneId() != null){
 						changeCurrentScene(getNextSceneId());
 					}else{
 						nextScene();
 					}
 				}
+				if (nextSceneId == "s8_ending4" || nextSceneId == "s2bb_ending3"){
+					isGameRunning = false;
+				}
+				else{
 				nextSceneId = null;				
+				}
 			}
-			
-			// Debugger para teste se está mudando os atributos
-			// do personagem e dos npcs!
-			//
-			// for (Npc l: npcs) {
-			// 	showTextLn(l.getName());
-			// 	showTextLn(String.valueOf(l.getAffinity()));
-			// }
-			// showTextLn("\nObol: " + String.valueOf(protagonista.getObol()));
-			// showTextLn("Anger: " + String.valueOf(protagonista.getAnger()));
-			// showTextLn("Sadness: " + String.valueOf(protagonista.getSadness()));
-			// showTextLn("Love: " + String.valueOf(protagonista.getLove()));
-			
+				
 			nextChapter();
+			
 		}
 
 		showTextLn("Game Finished!");
@@ -196,12 +181,13 @@ public class Game{
 	 * @param type, int list
 	 * @return String com o id da próxima cena
 	 */
+
 	public String changeSceneBasedInAttributes(String nextSceneNameId, int love, int sadness, int angry, int[] type){		
 		Boolean trueVerification = false;
 		for (int i : type) {
 			switch (i) {
 				case 1: // love > protagonista.love
-					if (love > protagonista.getLove()) {
+					if (love > orfeu.getLove()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -209,7 +195,7 @@ public class Game{
 					break;
 
 				case 2: // sadness > protagonista.sadness
-					if (sadness > protagonista.getSadness()) {
+					if (sadness > orfeu.getSadness()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -217,7 +203,7 @@ public class Game{
 					break;
 
 				case 3: // angry > protagonista.angry
-					if (angry > protagonista.getAnger()) {
+					if (angry > orfeu.getAnger()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -225,7 +211,7 @@ public class Game{
 					break;
 
 				case 4: // love == protagonista.love
-					if (love == protagonista.getLove()) {
+					if (love == orfeu.getLove()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -233,7 +219,7 @@ public class Game{
 					break;
 
 				case 5: // sadness == protagonista.sadness
-					if (sadness == protagonista.getSadness()) {
+					if (sadness == orfeu.getSadness()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -241,7 +227,7 @@ public class Game{
 					break;
 
 				case 6: // angry == protagonista.angry
-					if (angry == protagonista.getAnger()) {
+					if (angry == orfeu.getAnger()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -249,7 +235,7 @@ public class Game{
 					break;
 
 				case 7: // love < protagonista.love
-					if (love < protagonista.getLove()) {
+					if (love < orfeu.getLove()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -257,7 +243,7 @@ public class Game{
 					break;
 
 				case 8: // sadness < protagonista.sadness
-					if (sadness < protagonista.getSadness()) {
+					if (sadness < orfeu.getSadness()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -265,7 +251,7 @@ public class Game{
 					break;
 
 				case 9: // angry < protagonista.angry
-					if (angry < protagonista.getAnger()) {
+					if (angry < orfeu.getAnger()) {
 						trueVerification = true;
 					} else {
 						return null;
@@ -284,12 +270,17 @@ public class Game{
 		}
 	}
 
-	public boolean isTheChaptersFinished(){
-		return currentChapter == capitulos.size();
+	public boolean isGameRunning(){
+		if (!isGameRunning){
+			return false;
+		}
+		else {
+		return currentChapter != chapters.size();
+		}
 	}
 
 	public String getNextSceneId(){
-		return capitulos.get(currentChapter).getNextSceneId();
+		return chapters.get(currentChapter).getNextSceneId();
 	}
 
 	public void showTextLn(String text){
@@ -334,9 +325,9 @@ public class Game{
 		int sadness = getChoiceSadnessChange(choiceId);
 		String sceneNextId = getNextSceneIdChoice(choiceId);
 
-		protagonista.changeAnger(anger);
-		protagonista.changeLove(love);
-		protagonista.changeSadness(sadness);
+		orfeu.changeAnger(anger);
+		orfeu.changeLove(love);
+		orfeu.changeSadness(sadness);
 
 		Npc generic = getNpc(npcName);
 		if(generic != null){
@@ -359,44 +350,41 @@ public class Game{
 		currentChapter++;
 	}
 
-	public Game(int obol, int love, int anger, int sadness){
-		this.protagonista = new Orfeu(obol, love, anger, sadness);
-	}
 
 	public String nextSceneByAttributes(){
-        return capitulos.get(currentChapter).nextSceneByAttributes();
+        return chapters.get(currentChapter).nextSceneByAttributes();
     }
 
     public String getreqNpcName(){
-        return capitulos.get(currentChapter).getreqNpcName();
+        return chapters.get(currentChapter).getreqNpcName();
     }
 
     public int[] getType(){
-        return capitulos.get(currentChapter).getType();
+        return chapters.get(currentChapter).getType();
     }
 
     public int getReqLove(){
-        return capitulos.get(currentChapter).getReqLove();
+        return chapters.get(currentChapter).getReqLove();
     }
 
     public int getReqSadness(){
-        return capitulos.get(currentChapter).getReqSadness();
+        return chapters.get(currentChapter).getReqSadness();
     }
 
     public int getReqAngry(){
-        return capitulos.get(currentChapter).getReqAngry();
+        return chapters.get(currentChapter).getReqAngry();
     }
 
     public int getReqAffinity(){
-        return capitulos.get(currentChapter).getReqAffinity();
+        return chapters.get(currentChapter).getReqAffinity();
     }
 
     public int getReqObol(){
-        return capitulos.get(currentChapter).getReqObol();
+        return chapters.get(currentChapter).getReqObol();
     }
 
 	public String getSceneId(){
-		return capitulos.get(currentChapter).getSceneId();
+		return chapters.get(currentChapter).getSceneId();
 	}
 	
 	public void addNewNpc(String name, int affinity){
@@ -409,99 +397,104 @@ public class Game{
 	}
 
 	public void changeCurrentScene(String sceneId){
-		capitulos.get(currentChapter).changeCurrentScene(sceneId);
+		chapters.get(currentChapter).changeCurrentScene(sceneId);
 	}
 
 	public String getTitle(){
-		return capitulos.get(currentChapter).getTitle();
+		return chapters.get(currentChapter).getTitle();
 	}
 
 	public int choicesSize(){
-		return capitulos.get(currentChapter).choicesSize();
+		return chapters.get(currentChapter).choicesSize();
 	}
 
 	// Adder functions
 	public void addNewChapter(String title){
 		Chapter generic = new Chapter(title);
-		capitulos.add(generic);
+		chapters.add(generic);
 	}
 
 	public void addNewChapter(Chapter newChapter){
-		capitulos.add(newChapter);
+		chapters.add(newChapter);
 	}
 
 	// Scene functions
 	public void newScene(int chapterId){
-		capitulos.get(chapterId).newScene();
+		chapters.get(chapterId).newScene();
 	}
 
 	public void addNewDialogue(int chapterId, int sceneId, String textOfDialogue, String npcName){
-		capitulos.get(chapterId).addNewDialogue(sceneId, textOfDialogue, npcName);
+		chapters.get(chapterId).addNewDialogue(sceneId, textOfDialogue, npcName);
 	}
 
 	public void addNewChoice(int chapterId, int sceneId, String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
-		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, obol, affinity, love, angry, sadness);
+		chapters.get(chapterId).addNewChoice(sceneId, text, nextSceneId, obol, affinity, love, angry, sadness);
 	}
 
 	public void addNewChoice(int chapterId, int sceneId, String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
-		capitulos.get(chapterId).addNewChoice(sceneId, text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
+		chapters.get(chapterId).addNewChoice(sceneId, text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
 	}
 
 	public void nextScene(){
-		capitulos.get(currentChapter).nextScene();
+		chapters.get(currentChapter).nextScene();
 	}
 	
 	public boolean isScenesFinished(){
-		return capitulos.get(currentChapter).isScenesFinished();
+		if (!isGameRunning){
+			return true;
+		}
+		else {
+		return chapters.get(currentChapter).isScenesFinished();
+		}
 	}
 
 	public String nextDialogue(){
-		return capitulos.get(currentChapter).nextDialogue();
+		return chapters.get(currentChapter).nextDialogue();
 	}
 
 	public String getNpcThatSaidIt(){
-		return capitulos.get(currentChapter).getNpcThatSaidIt();
+		return chapters.get(currentChapter).getNpcThatSaidIt();
 	}
 
 	public String getCurrentDialogueText(){
-		return capitulos.get(currentChapter).getCurrentDialogueText();
+		return chapters.get(currentChapter).getCurrentDialogueText();
 	}
 
 	public boolean isFinishedAllDialogues(){
-		return capitulos.get(currentChapter).isFinishedAllDialogues();
+		return chapters.get(currentChapter).isFinishedAllDialogues();
 	}
 
 	// Choices functions
 	public String getChoicesText(){
-		return capitulos.get(currentChapter).getChoicesText();
+		return chapters.get(currentChapter).getChoicesText();
 	}
 
 	public String getText(int id){
-		return capitulos.get(currentChapter).getText(id);
+		return chapters.get(currentChapter).getText(id);
 	}
 
 	public String getNextSceneIdChoice(int id){
-		return capitulos.get(currentChapter).getNextSceneIdChoice(id);
+		return chapters.get(currentChapter).getNextSceneIdChoice(id);
 	}
 
 	public String getNpcInChoice(int id){
-		return capitulos.get(currentChapter).getNpcInChoice(id);
+		return chapters.get(currentChapter).getNpcInChoice(id);
 	}
 
 	public int getAffinityChange(int id){
-		return capitulos.get(currentChapter).getAffinityChange(id);
+		return chapters.get(currentChapter).getAffinityChange(id);
 	}
 
 	public int getChoiceLoveChange(int id){
-		return capitulos.get(currentChapter).getChoiceLoveChange(id);
+		return chapters.get(currentChapter).getChoiceLoveChange(id);
 	}
 
 	public int getChoiceAngryChange(int id){
-		return capitulos.get(currentChapter).getChoiceAngryChange(id);
+		return chapters.get(currentChapter).getChoiceAngryChange(id);
 	}
 
 	public int getChoiceSadnessChange(int id){
-		return capitulos.get(currentChapter).getChoiceSadnessChange(id);
+		return chapters.get(currentChapter).getChoiceSadnessChange(id);
 	}
 
 }

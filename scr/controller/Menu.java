@@ -53,7 +53,7 @@ public class Menu {
         clearConsole();
         switch (optionNumber) {
             case 1:
-                game = new Game(0, 0, 0, 0);
+                game = new Game();
 				game.gameRunning();
                 break;
             case 2:
