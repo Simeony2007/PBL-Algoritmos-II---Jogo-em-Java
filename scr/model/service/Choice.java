@@ -10,7 +10,7 @@ public class Choice{
 	private int angryChange;
 	private int sadnessChange;
 
-	public Choice(String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
+	public Choice(String text, String nextSceneId, String npcName, int obol, int affinity, int love, int sadness, int angry){
 		this.text = text;
 		this.nextSceneId = nextSceneId;
 		this.npc = npcName;
@@ -21,7 +21,7 @@ public class Choice{
 		this.sadnessChange = sadness;
 	}
 
-	public Choice(String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
+	public Choice(String text, String nextSceneId, int obol, int affinity, int love, int sadness, int angry){
 		this.text = text;
 		this.nextSceneId = nextSceneId;
 		this.obolChange = obol;
