@@ -62,6 +62,38 @@ public class Chapter{
 
 	// Scenes functions
 
+	public String nextSceneByAttributes(){
+        return scenes.get(currentScene).nextSceneByAttributes();
+    }
+
+    public String getreqNpcName(){
+        return scenes.get(currentScene).getreqNpcName();
+    }
+
+    public int[] getType(){
+        return scenes.get(currentScene).getType();
+    }
+
+    public int getReqLove(){
+        return scenes.get(currentScene).getReqLove();
+    }
+
+    public int getReqSadness(){
+        return scenes.get(currentScene).getReqSadness();
+    }
+
+    public int getReqAngry(){
+        return scenes.get(currentScene).getReqAngry();
+    }
+
+    public int getReqAffinity(){
+        return scenes.get(currentScene).getReqAffinity();
+    }
+
+    public int getReqObol(){
+        return scenes.get(currentScene).getReqObol();
+    }
+
 	public String getNextSceneId(){
 		return scenes.get(currentScene).getNextSceneId();
 	}

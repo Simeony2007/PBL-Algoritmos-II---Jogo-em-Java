@@ -8,6 +8,53 @@ public class Scene{
 	private int currentDialogueID = 0;
 	private String nextSceneId;
 
+	// --- Rota por Atributos ---
+	private String nextSceneByAttributes = null;
+	private String reqNpcName = null;
+	private int[] type;
+	private int reqLove;
+	private int reqSadness;
+	private int reqAngry;
+	private int reqAffinity;
+	private int reqObol;
+
+	public void setConditionByAttributes(String nextSceneId, String npcName, int obol, int[] types, int affinity, int love, int sadness, int angry) {
+		this.nextSceneByAttributes = nextSceneId;
+		this.reqNpcName = npcName;
+		this.type = types;
+		this.reqLove = love;
+		this.reqSadness = sadness;
+		this.reqAngry = angry;
+		this.reqAffinity = affinity;
+		this.reqObol = obol;
+	}
+
+	// --- Métodos Getters (Para o Game conseguir ler) ---
+	public String nextSceneByAttributes(){
+		return nextSceneByAttributes;
+	}
+	public String getreqNpcName(){
+		return reqNpcName;
+	}
+	public int[] getType(){
+		return type;
+	}
+	public int getReqLove(){
+		return reqLove;
+	}
+	public int getReqSadness(){
+		return reqSadness;
+	}
+	public int getReqAngry(){
+		return reqAngry;
+	}
+	public int getReqAffinity(){
+		return reqAffinity;
+	}
+	public int getReqObol(){
+		return reqObol;
+	}
+
 	public Scene(String sceneIdText){
 		this.sceneId = sceneIdText;
 		this.nextSceneId = null;

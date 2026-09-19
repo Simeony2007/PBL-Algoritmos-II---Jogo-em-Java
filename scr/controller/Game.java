@@ -20,6 +20,8 @@ public class Game{
 		String nextSceneId = null;
 		String npcAlvo = null;
 
+		
+		addNewChapter(StoryBuilder.BuildChapterTest());
 		addNewChapter(StoryBuilder.BuildChapter1());
 		addNewChapter(StoryBuilder.BuildChapter2());
 		addNewChapter(StoryBuilder.BuildChapter3());
@@ -52,6 +54,18 @@ public class Game{
 					nextSceneId = applyEffects(choiceId, npcAlvo);
 					clearConsole();
 					showTextLn("Opção escolhida: " + (choiceId+1));
+				}else{
+					if(nextSceneByAttributes() != null && getType() != null && getType().length > 0){
+						String genericScene;
+						if(getreqNpcName() != null){
+							genericScene = changeSceneBasedInAffinity(nextSceneByAttributes(), getreqNpcName(), getReqAffinity(), getType()[0]);
+						}else{
+							genericScene = changeSceneBasedInAttributes(nextSceneByAttributes(), getReqLove(), getReqSadness(), getReqAngry(), getType());
+						}
+						if(genericScene != null){
+							nextSceneId = genericScene;
+						}
+					}
 				}
 				if(nextSceneId != null){
 					changeCurrentScene(nextSceneId);
@@ -96,6 +110,178 @@ public class Game{
 
 	public void clearConsole(){
 		gameInterface.clearConsole();
+	}
+
+	public String changeSceneBasedInAffinity(String nextSceneNameId, String npcName, int affinity, int type){
+		Npc generic = getNpc(npcName);
+		
+		switch (type) {
+			case 1:
+				if (generic.getAffinity() > affinity) {
+					return nextSceneNameId;
+				}
+				else{
+					return null;
+				}
+		
+			case 2:
+				if (generic.getAffinity() == affinity) {
+					return nextSceneNameId;
+				}
+				else{
+					return null;
+				}
+			
+			case 3:
+				if (generic.getAffinity() < affinity) {
+					return nextSceneNameId;
+				}
+				else{
+					return null;
+				}
+			default:
+				return null;
+				
+		}
+	}
+
+	/**
+	 * O type escolhe o tipo de verificação, seguindo a tabela:
+	 * <table border="1">
+	 *   <tr>
+	 *     <th>Type</th>
+	 *     <th>Condição</th>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>1</td>
+	 *     <td>{@code love > protagonista.love}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>2</td>
+	 *     <td>{@code sadness > protagonista.sadness}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>3</td>
+	 *     <td>{@code angry > protagonista.angry}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>4</td>
+	 *     <td>{@code love == protagonista.love}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>5</td>
+	 *     <td>{@code sadness == protagonista.sadness}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>6</td>
+	 *     <td>{@code angry == protagonista.angry}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>7</td>
+	 *     <td>{@code love < protagonista.love}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>8</td>
+	 *     <td>{@code sadness < protagonista.sadness}</td>
+	 *   </tr>
+	 *   <tr>
+	 *     <td>9</td>
+	 *     <td>{@code angry < protagonista.angry}</td>
+	 *   </tr>
+	 * </table>
+	 * @param nextSceneNameId
+	 * @param love
+	 * @param sadness
+	 * @param angry
+	 * @param type, int list
+	 * @return String com o id da próxima cena
+	 */
+	public String changeSceneBasedInAttributes(String nextSceneNameId, int love, int sadness, int angry, int[] type){		
+		Boolean trueVerification = false;
+		for (int i : type) {
+			switch (i) {
+				case 1: // love > protagonista.love
+					if (love > protagonista.getLove()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 2: // sadness > protagonista.sadness
+					if (sadness > protagonista.getSadness()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 3: // angry > protagonista.angry
+					if (angry > protagonista.getAnger()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 4: // love == protagonista.love
+					if (love == protagonista.getLove()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 5: // sadness == protagonista.sadness
+					if (sadness == protagonista.getSadness()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 6: // angry == protagonista.angry
+					if (angry == protagonista.getAnger()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 7: // love < protagonista.love
+					if (love < protagonista.getLove()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 8: // sadness < protagonista.sadness
+					if (sadness < protagonista.getSadness()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				case 9: // angry < protagonista.angry
+					if (angry < protagonista.getAnger()) {
+						trueVerification = true;
+					} else {
+						return null;
+					}
+					break;
+
+				default:
+					trueVerification = false;
+					return null;
+			}
+		}
+		if (trueVerification) {
+			return nextSceneNameId;
+		}else{
+			return null;
+		}
 	}
 
 	public boolean isTheChaptersFinished(){
@@ -176,6 +362,38 @@ public class Game{
 	public Game(int obol, int love, int anger, int sadness){
 		this.protagonista = new Orfeu(obol, love, anger, sadness);
 	}
+
+	public String nextSceneByAttributes(){
+        return capitulos.get(currentChapter).nextSceneByAttributes();
+    }
+
+    public String getreqNpcName(){
+        return capitulos.get(currentChapter).getreqNpcName();
+    }
+
+    public int[] getType(){
+        return capitulos.get(currentChapter).getType();
+    }
+
+    public int getReqLove(){
+        return capitulos.get(currentChapter).getReqLove();
+    }
+
+    public int getReqSadness(){
+        return capitulos.get(currentChapter).getReqSadness();
+    }
+
+    public int getReqAngry(){
+        return capitulos.get(currentChapter).getReqAngry();
+    }
+
+    public int getReqAffinity(){
+        return capitulos.get(currentChapter).getReqAffinity();
+    }
+
+    public int getReqObol(){
+        return capitulos.get(currentChapter).getReqObol();
+    }
 
 	public String getSceneId(){
 		return capitulos.get(currentChapter).getSceneId();

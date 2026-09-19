@@ -6,6 +6,8 @@ import scr.model.service.Scene;
 
 import java.util.ArrayList;
 
+import javax.script.ScriptEngine;
+
 public class StoryBuilder {
     public static Object BuildGame;
 
@@ -25,6 +27,73 @@ public class StoryBuilder {
         return (npcs);
     }
 
+    public static Chapter BuildChapterTest() {
+        Chapter chapter = new Chapter("Capítulo Teste - O Teste Duplo (Afinidade e Atributos)");
+
+        // --- INSTANCIANDO AS CENAS ---
+        // Cena 1 vai direto para a Cena 2
+        Scene scene1 = new Scene("s1_start", "s2_affinity");
+        
+        // Cena 2 testa afinidade. Se falhar, cai no "s_bad"
+        Scene scene2 = new Scene("s2_affinity", "s_bad"); 
+        
+        // Cena 3 testa atributos. Se falhar, cai no "s_bad"
+        Scene scene3 = new Scene("s3_attributes", "s_bad");
+        
+        // Cenas Finais
+        Scene scene4_good = new Scene("s4_good", "fim");
+        Scene scene_bad = new Scene("s_bad", "fim");
+        Scene sceneFim = new Scene("fim");
+
+        // --- DIÁLOGOS ---
+        scene1.addNewDialogue("Bem-vindo ao Teste Duplo do Motor de Visual Novel.");
+        scene1.addNewDialogue("Para alcançar o Final Verdadeiro, você precisará passar por DUAS verificações ocultas consecutivas.");
+        
+        scene2.addNewDialogue("[TESTE 1: AFINIDADE]");
+        scene2.addNewDialogue("Analisando a afinidade do barqueiro 'Charon'...");
+        scene2.addNewDialogue("Se for maior que 5, você avançará. Caso contrário, fim de jogo.");
+        
+        scene3.addNewDialogue("[TESTE 1 APROVADO]");
+        scene3.addNewDialogue("A afinidade de Charon era alta o suficiente! Ele permitiu sua passagem.");
+        scene3.addNewDialogue("[TESTE 2: ATRIBUTOS]");
+        scene3.addNewDialogue("Agora o sistema verificará o seu próprio coração.");
+        scene3.addNewDialogue("O 'Love' de Orfeu precisa ser maior que 5. Calculando...");
+        
+        scene4_good.addNewDialogue("[FINAL VERDADEIRO ATINGIDO]");
+        scene4_good.addNewDialogue("Incrível! Charon respeitava você (Afinidade > 5) E seu coração era puro (Love > 5).");
+        scene4_good.addNewDialogue("Seu motor consegue encadear checagens complexas perfeitamente!");
+        
+        scene_bad.addNewDialogue("[FINAL RUIM ATINGIDO]");
+        scene_bad.addNewDialogue("Você caiu no caminho padrão porque falhou em um dos testes.");
+        scene_bad.addNewDialogue("Ou Charon não gostava de você o suficiente, ou Orfeu não tinha Amor suficiente.");
+
+        sceneFim.addNewDialogue("--- Fim do Teste Duplo ---");
+
+        // --- CONFIGURANDO AS ROTAS SECRETAS ---
+        
+        // 1. Rota de Afinidade (Cena 2)
+        // Regra 1: Afinidade do NPC > exigência
+        int[] regrasAfinidade = { 1 }; 
+        // Passamos "Charon" (forçando o IF no Game.java) e 5 de afinidade.
+        // Assinatura: (nextSceneId, npcName, obol, types, affinity, love, sadness, angry)
+        scene2.setConditionByAttributes("s3_attributes", "Charon", 0, regrasAfinidade, 5, 0, 0, 0);
+
+        // 2. Rota de Atributos (Cena 3)
+        // Regra 7: O status de Love do jogador > exigência da cena (exigência 5 < protagonista)
+        int[] regrasAtributo = { 7 };
+        // Passamos NULL no npcName (forçando o ELSE no Game.java) e 5 no love.
+        scene3.setConditionByAttributes("s4_good", null, 0, regrasAtributo, 0, 5, 0, 0);
+
+        // --- MONTANDO O CAPÍTULO ---
+        chapter.newScene(scene1);
+        chapter.newScene(scene2);
+        chapter.newScene(scene3);
+        chapter.newScene(scene4_good);
+        chapter.newScene(scene_bad);
+        chapter.newScene(sceneFim);
+
+        return chapter;
+    }
 
     public static Chapter BuildChapter1(){
         Chapter chapter = new Chapter("Capítulo 1 - A Entrada do Submundo");
