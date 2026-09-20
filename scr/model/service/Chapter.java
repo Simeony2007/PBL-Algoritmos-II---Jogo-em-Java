@@ -13,27 +13,9 @@ public class Chapter{
 	// ---------------
 
 	// Adding functions
-	public void newScene(){
-		Scene generic = new Scene(null);
-		scenes.add(generic);
-	}
-
 	public void newScene(Scene scene){
 		scenes.add(scene);
 	}
-
-	public void addNewDialogue(int id, String textOfDialogue, String npcName){
-		scenes.get(id).addNewDialogue(textOfDialogue, npcName);
-	}
-
-	public void addNewChoice(int id, String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
-		scenes.get(id).addNewChoice(text, nextSceneId, obol, affinity, love, angry, sadness);
-	}
-
-	public void addNewChoice(int id, String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
-		scenes.get(id).addNewChoice(text, nextSceneId, npcName, obol, affinity, love, angry, sadness);
-	}
-	// -----------------------------------
 
 	public String getTitle(){
 		return title;
@@ -45,6 +27,14 @@ public class Chapter{
 				currentScene = scenes.indexOf(i);
 			}
 		}
+	}
+
+	public Choice getChoice(int id){
+		return scenes.get(currentScene).getChoice(id);
+	}
+
+	public Scene getScene(){
+		return scenes.get(currentScene);
 	}
 
 	public String getSceneId() {
@@ -63,35 +53,7 @@ public class Chapter{
 	// Scenes functions
 
 	public String nextSceneByAttributes(){
-        return scenes.get(currentScene).nextSceneByAttributes();
-    }
-
-    public String getreqNpcName(){
-        return scenes.get(currentScene).getreqNpcName();
-    }
-
-    public int[] getType(){
-        return scenes.get(currentScene).getType();
-    }
-
-    public int getReqLove(){
-        return scenes.get(currentScene).getReqLove();
-    }
-
-    public int getReqSadness(){
-        return scenes.get(currentScene).getReqSadness();
-    }
-
-    public int getReqAngry(){
-        return scenes.get(currentScene).getReqAngry();
-    }
-
-    public int getReqAffinity(){
-        return scenes.get(currentScene).getReqAffinity();
-    }
-
-    public int getReqObol(){
-        return scenes.get(currentScene).getReqObol();
+        return scenes.get(currentScene).getReqSceneId();
     }
 
 	public String getNextSceneId(){
@@ -130,30 +92,5 @@ public class Chapter{
 	public String getNextSceneIdChoice(int id){
 		return scenes.get(currentScene).getNextSceneIdChoice(id);
 	}
-
-	public String getNpcInChoice(int id){
-		return scenes.get(currentScene).getNpcInChoice(id);
-	}
-
-	public int getObolChange(int id){
-		return scenes.get(currentScene).getObolChange(id);
-	}
-
-	public int getAffinityChange(int id){
-		return scenes.get(currentScene).getAffinityChange(id);
-	}
-
-	public int getChoiceLoveChange(int id){
-		return scenes.get(currentScene).getChoiceLoveChange(id);
-	}
-
-	public int getChoiceAngryChange(int id){
-		return scenes.get(currentScene).getChoiceAngryChange(id);
-	}
-
-	public int getChoiceSadnessChange(int id){
-		return scenes.get(currentScene).getChoiceSadnessChange(id);
-	}
-
 
 }

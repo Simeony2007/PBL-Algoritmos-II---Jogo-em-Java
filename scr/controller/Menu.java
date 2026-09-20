@@ -1,5 +1,4 @@
 package scr.controller;
-import scr.controller.Game;
 import scr.view.GameInterface;
 
 public class Menu {
@@ -26,7 +25,7 @@ public class Menu {
 	}
 
 	public void showText(String text){
-		gameInterface.showText(text);
+		gameInterface.showTextLn(text);
 	}
 
 	public String getTextInput(){

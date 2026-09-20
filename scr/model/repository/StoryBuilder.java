@@ -32,7 +32,6 @@ public class StoryBuilder {
 
     public static ArrayList<Chapter> getChapters(){
         ArrayList<Chapter> chapters = new ArrayList<>();
-        // chapters.add(BuildChapterTest());
         chapters.add(BuildChapter1());
         chapters.add(BuildChapter2());
         chapters.add(BuildChapter3());
@@ -46,73 +45,6 @@ public class StoryBuilder {
         return chapters;
     }
 
-    public static Chapter BuildChapterTest() {
-        Chapter chapter = new Chapter("Capítulo Teste - O Teste Duplo (Afinidade e Atributos)");
-
-        // --- INSTANCIANDO AS CENAS ---
-        // Cena 1 vai direto para a Cena 2
-        Scene scene1 = new Scene("s1_start", "s2_affinity");
-        
-        // Cena 2 testa afinidade. Se falhar, cai no "s_bad"
-        Scene scene2 = new Scene("s2_affinity", "s_bad"); 
-        
-        // Cena 3 testa atributos. Se falhar, cai no "s_bad"
-        Scene scene3 = new Scene("s3_attributes", "s_bad");
-        
-        // Cenas Finais
-        Scene scene4_good = new Scene("s4_good", "fim");
-        Scene scene_bad = new Scene("s_bad", "fim");
-        Scene sceneFim = new Scene("fim");
-
-        // --- DIÁLOGOS ---
-        scene1.addNewDialogue("Bem-vindo ao Teste Duplo do Motor de Visual Novel.");
-        scene1.addNewDialogue("Para alcançar o Final Verdadeiro, você precisará passar por DUAS verificações ocultas consecutivas.");
-        
-        scene2.addNewDialogue("[TESTE 1: AFINIDADE]");
-        scene2.addNewDialogue("Analisando a afinidade do barqueiro 'Charon'...");
-        scene2.addNewDialogue("Se for maior que 5, você avançará. Caso contrário, fim de jogo.");
-        
-        scene3.addNewDialogue("[TESTE 1 APROVADO]");
-        scene3.addNewDialogue("A afinidade de Charon era alta o suficiente! Ele permitiu sua passagem.");
-        scene3.addNewDialogue("[TESTE 2: ATRIBUTOS]");
-        scene3.addNewDialogue("Agora o sistema verificará o seu próprio coração.");
-        scene3.addNewDialogue("O 'Love' de Orfeu precisa ser maior que 5. Calculando...");
-        
-        scene4_good.addNewDialogue("[FINAL VERDADEIRO ATINGIDO]");
-        scene4_good.addNewDialogue("Incrível! Charon respeitava você (Afinidade > 5) E seu coração era puro (Love > 5).");
-        scene4_good.addNewDialogue("Seu motor consegue encadear checagens complexas perfeitamente!");
-        
-        scene_bad.addNewDialogue("[FINAL RUIM ATINGIDO]");
-        scene_bad.addNewDialogue("Você caiu no caminho padrão porque falhou em um dos testes.");
-        scene_bad.addNewDialogue("Ou Charon não gostava de você o suficiente, ou Orfeu não tinha Amor suficiente.");
-
-        sceneFim.addNewDialogue("--- Fim do Teste Duplo ---");
-
-        // --- CONFIGURANDO AS ROTAS SECRETAS ---
-        
-        // 1. Rota de Afinidade (Cena 2)
-        // Regra 1: Afinidade do NPC > exigência
-        int[] regrasAfinidade = { 1 }; 
-        // Passamos "Charon" (forçando o IF no Game.java) e 5 de afinidade.
-        // Assinatura: (nextSceneId, npcName, obol, types, affinity, love, sadness, angry)
-        scene2.setConditionByAttributes("s3_attributes", "Charon", 0, regrasAfinidade, 5, 0, 0, 0);
-
-        // 2. Rota de Atributos (Cena 3)
-        // Regra 7: O status de Love do jogador > exigência da cena (exigência 5 < protagonista)
-        int[] regrasAtributo = { 7 };
-        // Passamos NULL no npcName (forçando o ELSE no Game.java) e 5 no love.
-        scene3.setConditionByAttributes("s4_good", null, 0, regrasAtributo, 0, 5, 0, 0);
-
-        // --- MONTANDO O CAPÍTULO ---
-        chapter.newScene(scene1);
-        chapter.newScene(scene2);
-        chapter.newScene(scene3);
-        chapter.newScene(scene4_good);
-        chapter.newScene(scene_bad);
-        chapter.newScene(sceneFim);
-
-        return chapter;
-    }
 
     private static Chapter BuildChapter1(){
         Chapter chapter = new Chapter("Capítulo 1 - A Entrada do Submundo");
@@ -125,7 +57,7 @@ public class StoryBuilder {
         scene1.addNewDialogue("O que mais motiva os passos de Orfeu em direção ao abismo?");
         scene1.addNewChoice("Seu peito queima com um amor que transcende a mortalidade. Você avança movido pela convicção de que nem mesmo Hades pode separar duas almas gêmeas.", "s2_cerberus", 0, 0, 2, 0, 0);
         scene1.addNewChoice("Cada nota que toca é um lamento lúgubre. A dor de não tê-la ao seu lado é um peso esmagador que o arrasta naturalmente para as sombras.", "s2_cerberus", 0, 0, 0, 0, 2);
-        scene1.addNewChoice("Como os deuses permitiram tamanha injustiça? Sua música agora é um hino de fúria contra o destino cruel, e você não aceitará um \"não\" como resposta.", "s2_cerberus", 0, 0, 2, 0, 0);
+        scene1.addNewChoice("Como os deuses permitiram tamanha injustiça? Sua música agora é um hino de fúria contra o destino cruel, e você não aceitará um \"não\" como resposta.", "s2_cerberus", 0, 0, 0, 2, 0);
         chapter.newScene(scene1);
         
         // Cena 2 - Confronto com Cérbero
@@ -213,9 +145,9 @@ public class StoryBuilder {
         scene6.addNewDialogue("Caronte: Diga-me, vivo... O que exatamente te arrastou para a terra dos mortos?");
         scene6.addNewDialogue("O que você responde às indagações de Caronte?");
 
-        scene6.addNewChoice("Não faça perguntas, apenas me leve em frente", "s6a_charon_boat","Charon", 0, -1, 0, 0, 0);
+        scene6.addNewChoice("Não faça perguntas, apenas me leve em frente", "s6a_charon_boat","Charon", 0, -1, 0, 1, 0);
         scene6.addNewChoice("Desejo rever o amor da minha vida", "s6b_charon_boat","Charon", 0, 0, 0, 0, 0);
-        scene6.addNewChoice("Não consigo viver sem ela", "s6c_charon_boat","Charon", 0, 0, 0, 0, 0);
+        scene6.addNewChoice("Não consigo viver sem ela", "s6c_charon_boat","Charon", 0, 0, 0, 0, 1);
         chapter.newScene(scene6);
 
         // Cena 6a, 6b e 6c
@@ -276,7 +208,7 @@ public class StoryBuilder {
 
         scene2.addNewChoice("Música vibrante sobre o mar e a brisa salgada", "s2a_sailor", 0, 0, 0, -1, 0);
         scene2.addNewChoice("Lamentar a perda das memórias e a tragédia do marinheiro", "s2b_sailor", 0, 0, 0, 0, 0);
-        scene2.addNewChoice("Ignorar sua prece nostálgica e pedir informações", "s2c_sailor", "Charon", 0, -1, 0, 0, 0);
+        scene2.addNewChoice("Ignorar sua prece nostálgica e pedir informações", "s2c_sailor", "Charon", 0, -1, 0, 1, 0);
 
         // Cenas 2a, 2b e 2c - Resultados das escolhas com o Marinheiro
         scene2a.addNewDialogue("A melodia traz o cheiro imaginário de sal e a visão de águas cristalinas. O marinheiro chora de alegria.");
@@ -298,7 +230,7 @@ public class StoryBuilder {
 
         scene3.addNewChoice("Agradecer o carinho com humildade e oferecer uma melodia em retribuição", "s3a_fan", 1, 0, 0, 0, 0);
         scene3.addNewChoice("Aceitar a moeda com melancolia, dizendo que a fama não salvou sua esposa", "s3b_fan", 1, 0, 0, 0, 0);
-        scene3.addNewChoice("Pegar a moeda de forma ríspida, dizendo que elogios não têm valor no mundo dos mortos", "s3c_fan", "Charon", 1, -1, 0, 0, 0);
+        scene3.addNewChoice("Pegar a moeda de forma ríspida, dizendo que elogios não têm valor no mundo dos mortos", "s3c_fan", "Charon", 1, -1, 0, 1, 0);
 
         // Cenas 3a, 3b e 3c - Resultados das escolhas com o Fã
         scene3a.addNewDialogue("Orfeu: Sua gentileza aquece este reino de gelo eterno. Deixe-me retribuir da única forma que sei.");
@@ -317,7 +249,7 @@ public class StoryBuilder {
         scene4.addNewDialogue("Qual música você usará para repelir as Keres famintas?");
 
         scene4.addNewChoice("Música sobre esperança de um futuro melhor", "s4a_keres", 0, 0, 0, 0, 0);
-        scene4.addNewChoice("Música sobre a fatalidade da morte", "s4b_keres", 0, 0, 0, 0, 0);
+        scene4.addNewChoice("Música sobre a fatalidade da morte", "s4b_keres", 0, 0, 0, 0, 1);
         scene4.addNewChoice("Música sobre heróis matando monstros", "s4c_keres", 1, 0, 0, 0, 0);
 
         // Cenas 4a, 4b e 4c - Resultados das escolhas com as Keres
@@ -335,7 +267,7 @@ public class StoryBuilder {
         scene5.addNewDialogue("O que Orfeu expressa sobre sua experiência nos Campos de Asfódelo?");
 
         scene5.addNewChoice("Expressar compaixão pelas almas", "s5a_charon", "Charon", -1, 1, 0, 0, 0);
-        scene5.addNewChoice("Demonstrar desprezo pelas almas e pelo lugar", "s5b_charon", "Charon", -1, -1, 0, 0, 0);
+        scene5.addNewChoice("Demonstrar desprezo pelas almas e pelo lugar", "s5b_charon", "Charon", -1, -1, 0, 1, 0);
 
         // Cenas 5a e 5b - Diálogos finais com Caronte
         scene5a.addNewDialogue("Orfeu: Ninguém merece ser esquecido dessa forma, apagado como uma chama sem vento. É uma existência cruel, privada de dor, mas roubada de qualquer alegria. Sinto pena de cada uma daquelas almas.");
@@ -393,7 +325,7 @@ public class StoryBuilder {
 
         scene1.addNewChoice("Nossas memórias são os alicerces de quem amamos", "s1a_memory", 1, 0, 0, 0, 0);
         scene1.addNewChoice("A dor prova que um dia nós estivemos vivos", "s1b_memory", 1, 0, 0, 0, 0);
-        scene1.addNewChoice("Sua covardia me dá nojo", "s1c_memory", "Charon", 1, -1, 0, 0, 1);
+        scene1.addNewChoice("Sua covardia me dá nojo", "s1c_memory", "Charon", 1, -1, 0, 1, 0);
 
         // Cenas 1a, 1b e 1c - Resultados das escolhas com a Alma Nobre
         scene1a.addNewDialogue("Orfeu: Apagar sua dor é apagar também os sorrisos e a luz de quem você amou.");
@@ -412,8 +344,8 @@ public class StoryBuilder {
         scene2.addNewDialogue("Como Orfeu responde à revelação amarga do velho soldado?");
 
         scene2.addNewChoice("O paraíso é justo, pois o amor deles pelo mundo lhes custou tudo", "s2a_glory", 0, 0, 1, 0, 0);
-        scene2.addNewChoice("A eternidade dourada não apaga a dor do que foi perdido", "s2b_glory", 0, 1, 0, 1, 0);
-        scene2.addNewChoice("Sua glória inútil não me interessa, seu fantasma patético", "s2c_glory", "Charon", 0, -1, 0, 0, 1);
+        scene2.addNewChoice("A eternidade dourada não apaga a dor do que foi perdido", "s2b_glory", 0, 1, 0, 0, 1);
+        scene2.addNewChoice("Sua glória inútil não me interessa, seu fantasma patético", "s2c_glory", "Charon", 0, -1, 0, 1, 0);
 
         // Cenas 2a, 2b e 2c - Resultados das escolhas com o Guerreiro
         scene2a.addNewDialogue("Orfeu: Eles sacrificaram seu futuro para proteger suas famílias e cidades. A paz é a única recompensa justa.");
@@ -433,8 +365,8 @@ public class StoryBuilder {
         scene3.addNewDialogue("Qual será a resposta de Orfeu ao questionamento fatalista de Jasão?");
 
         scene3.addNewChoice("O amor verdadeiro cura, não destrói", "s3a_jason", 0, 0, 1, 0, 0);
-        scene3.addNewChoice("A dor da perda é o nosso destino comum", "s3b_jason", 0, 0, 0, 1, 0);
-        scene3.addNewChoice("O passado de vocês não dita o meu futuro", "s3c_jason", 0, 0, 0, 0, 1);
+        scene3.addNewChoice("A dor da perda é o nosso destino comum", "s3b_jason", 0, 0, 0, 0, 1);
+        scene3.addNewChoice("O passado de vocês não dita o meu futuro", "s3c_jason", 0, 0, 0, 1, 0);
 
         // Cenas 3a, 3b e 3c - Resultados das escolhas com Jasão
         scene3a.addNewDialogue("Orfeu: Médea foi consumida pela obsessão pura. O que sinto por Eurídice é divino e lutarei por isso até o fim.");
@@ -573,9 +505,9 @@ public class StoryBuilder {
         scene1.addNewDialogue("O bardo guarda sua harpa. Ele sabe que a música não será suficiente para convencer os senhores do Submundo; ele precisará usar o peso de suas próprias palavras.");
         scene1.addNewDialogue("Qual é o principal argumento de Orfeu para que os deuses devolvam Eurídice?");
 
-        scene1.addNewChoice("Nossas almas foram forjadas como uma só, separá-las é um erro", "s1a_throne", 0, 0, 0, 0, 0);
-        scene1.addNewChoice("A escuridão já tomou muito do meu mundo lá em cima, não leve a minha única luz", "s1b_throne", 0, 0, 0, 0, 0);
-        scene1.addNewChoice("Ela foi roubada por uma fatalidade cruel antes de viver seu destino!", "s1c_throne", 0, 0, 0, 0, 0);
+        scene1.addNewChoice("Nossas almas foram forjadas como uma só, separá-las é um erro", "s1a_throne", 0, 0, 1, 0, 0);
+        scene1.addNewChoice("A escuridão já tomou muito do meu mundo lá em cima, não leve a minha única luz", "s1b_throne", 0, 0, 0, 0, 1);
+        scene1.addNewChoice("Ela foi roubada por uma fatalidade cruel antes de viver seu destino!", "s1c_throne", 0, 0, 0, 1, 0);
         chapter.newScene(scene1);
 
         // Cena 1a, 1b e 1c
@@ -595,8 +527,7 @@ public class StoryBuilder {
         // Cena 2 - O Julgamento de Hades
         Scene scene2 = new Scene("s2_judgement", "s2a_judgement");
         scene2.addNewDialogue("O silêncio que se segue é denso e sufocante, quebrado apenas pelo tilintar das joias no chão. Hades se inclina em seu trono de ouro negro, pesando a alma de Orfeu e avaliando as atitudes do bardo durante sua jornada.");
-        int[] regrasAtributo = { 9 };
-        scene1a.setConditionByAttributes("s2b_judgement", null, 0, regrasAtributo, 0, 0, 0, 5);
+        scene1a.setConditionByAttributes("s2b_judgement", null, 0, 3, 0, 0, 0, 5);
         chapter.newScene(scene2);
 
         // Cena 2a e 2b
@@ -608,14 +539,13 @@ public class StoryBuilder {
         scene2b.addNewDialogue("Hades se levanta do trono, fazendo o chão tremer levemente sob o peso de sua ira.");
         scene2b.addNewDialogue("Hades: Você ousa vir ao meu palácio suplicar por amor, mortal? Meus súditos em Asfódelo e nos Elíseos sussurraram sobre a sua crueldade.");
         scene2b.addNewDialogue("Hades: Você pisou na dor dos meus mortos com arrogância! Por que eu deveria ser gentil com alguém que só espalhou ódio no meu reino?");
-        int[] regrasAtributo2 = { 7 };
-        scene2b.setConditionByAttributes("s2b_judgement_good", null, 0, regrasAtributo2, 0, 5, 0, 0);
+        scene2b.setConditionByAttributes("s2b_judgement_good", null, 0, 1, 0, 5, 0, 0);
         chapter.newScene(scene2b);
 
         Scene scene2bg = new Scene("s2b_judgement_good", null);
         Scene scene2bb = new Scene("s2b_judgement_bad", null);
-        scene2bg.addNewChoice("Engolir o orgulho e pedir perdão por sua amargura", "s2bg_judgement_next", 0, 0, 1, 0, 0);
-        scene2bb.addNewChoice("Dobrar a aposta e exigir Eurídice de qualquer maneira", "s2bb_ending3", 0, 0, 0, 0, 0);
+        scene2bg.addNewChoice("Engolir o orgulho e pedir perdão por sua amargura", "s2bg_judgement_next", 0, 0, 1, -2, 0);
+        scene2bb.addNewChoice("Dobrar a aposta e exigir Eurídice de qualquer maneira", "s2bb_ending3", 0, 0, -2, 2, 0);
         chapter.newScene(scene2bg);
         chapter.newScene(scene2bb);
 
@@ -649,7 +579,7 @@ public class StoryBuilder {
         scene3.addNewDialogue("Como Orfeu tenta convencer Eurídice a abandonar o conforto apático da morte?");
 
         scene3.addNewChoice("Lembre-se do sol tocando nosso rosto e de tudo o que ainda vamos viver", "s3a_eurydice", 0, 0, 1, 0, 0);
-        scene3.addNewChoice("Por favor, eu imploro, não me deixe sozinho com esse desespero", "s3b_eurydice", 0, 0, 0, 1, 0);
+        scene3.addNewChoice("Por favor, eu imploro, não me deixe sozinho com esse desespero", "s3b_eurydice", 0, 0, 0, 0, 1);
         scene3.addNewChoice("Se você ficar, levarei sua memória comigo como um farol eterno", "s3c_eurydice", 0, 1, 0, 0, 0);
         chapter.newScene(scene3);
 
@@ -731,9 +661,9 @@ public class StoryBuilder {
         scene2.addNewDialogue("Eurídice: A música... parece tão distante, Orfeu. Aqui embaixo, aprendi que o silêncio é a única verdade duradoura. As vozes do mundo dos vivos parecem apenas ruídos fúteis de quem ainda não entendeu que vai morrer.");
         scene2.addNewDialogue("Como Orfeu lida com a estranheza e a frieza crescente nas palavras de Eurídice?");
 
-        scene2.addNewChoice("A minha música trará você de volta à vida por completo, eu prometo", "s2a_trail_shadow", 0, 1, 0, 0, 1);
+        scene2.addNewChoice("A minha música trará você de volta à vida por completo, eu prometo", "s2a_trail_shadow", 0, 1, 1, 0, 0);
         scene2.addNewChoice("O Submundo deixou marcas profundas em nós dois, vamos superar isso juntos", "s2b_trail_shadow", 0, 0, 1, 0, 1);
-        scene2.addNewChoice("Você não é um fantasma, pare de falar como se pertencesse a este lugar maldito", "s2c_trail_shadow", 0, 0, 0, 0, 0);
+        scene2.addNewChoice("Você não é um fantasma, pare de falar como se pertencesse a este lugar maldito", "s2c_trail_shadow", 0, -1, 0, 0, 0);
 
         // Cenas 2a, 2b e 2c - Resultados das escolhas
         scene2a.addNewDialogue("Orfeu ergue a voz levemente, cheio de esperança fervorosa.");
@@ -755,9 +685,9 @@ public class StoryBuilder {
         scene3.addNewDialogue("Eurídice: Estamos passando por este caminho dourado... Sinto o ar mudar, mas sinto um vazio estranho. Diga-me a verdade, Orfeu: quando chegarmos à luz, eu serei de fato quem eu era, ou apenas uma lembrança viva que errou o caminho de volta para a cova?");
         scene3.addNewDialogue("O que Orfeu responde à pergunta cortante e angustiante de Eurídice?");
 
-        scene3.addNewChoice("Você será sempre o meu único lar e o meu maior amor", "s3a_hidden_shortcut", 0, 1, 0, 0, 1);
+        scene3.addNewChoice("Você será sempre o meu único lar e o meu maior amor", "s3a_hidden_shortcut", 0, 1, 1, 0, 0);
         scene3.addNewChoice("Seremos diferentes, mas vamos sarar as feridas juntos no mundo dos vivos", "s3b_hidden_shortcut", 0, 0, 1, 0, 1);
-        scene3.addNewChoice("Basta sairmos daqui para que essas tolices saiam da sua cabeça", "s3c_hidden_shortcut", 0, 0, 0, 0, -1);
+        scene3.addNewChoice("Basta sairmos daqui para que essas tolices saiam da sua cabeça", "s3c_hidden_shortcut", 0, -1, -1, 1, 0);
 
         // Cenas 3a, 3b e 3c - Resultados das escolhas
         scene3a.addNewDialogue("Orfeu vira o rosto minimamente para trás, sem contudo quebrar a regra de olhar em seus olhos.");
@@ -813,9 +743,9 @@ public class StoryBuilder {
         scene1.addNewDialogue("Eurídice: É tão silencioso aqui... A dor da picada e o frio do esquecimento desapareceram por completo. Ninguém chora nos Elíseos, Orfeu. Ninguém sofre.");
         scene1.addNewDialogue("Como Orfeu reage à primeira impressão pacífica que os Elíseos exercem sobre a alma de sua esposa?");
 
-        scene1.addNewChoice("A verdadeira vida tem lágrimas e sorrisos, a paz daqui é apenas uma prisão", "s1a_elysium_glow", 0, 1, 0, 0, 0);
-        scene1.addNewChoice("Eu entendo o seu cansaço, mas o nosso lugar ainda não é entre os mortos", "s1b_elysium_glow", 0, 1, 1, 0, 0);
-        scene1.addNewChoice("Não ouse se render agora, depois de tudo o que atravessei para te buscar", "s1c_elysium_glow", 0, 0, 0, 0, 0);
+        scene1.addNewChoice("A verdadeira vida tem lágrimas e sorrisos, a paz daqui é apenas uma prisão", "s1a_elysium_glow", 0, 1, 1, 0, 0);
+        scene1.addNewChoice("Eu entendo o seu cansaço, mas o nosso lugar ainda não é entre os mortos", "s1b_elysium_glow", 0, 2, 0, 0, 1);
+        scene1.addNewChoice("Não ouse se render agora, depois de tudo o que atravessei para te buscar", "s1c_elysium_glow", 0, -2, -2, 0, 0);
 
         // Cenas 1a, 1b e 1c - Resultados das escolhas
         scene1a.addNewDialogue("Orfeu aperta as mãos com firmeza.");
@@ -837,9 +767,9 @@ public class StoryBuilder {
         scene2.addNewDialogue("Eurídice: Eles têm razão, Orfeu... Lá em cima, eu era apenas uma mortal frágil destinada ao sofrimento. Aqui, encontrei a paz que o mundo me negou. Diga-me a verdade, olhando no fundo da sua alma... Você me trouxe de volta por amor ao que éramos, ou por saudade egoísta do meu canto e da minha companhia?");
         scene2.addNewDialogue("O que Orfeu responde à pergunta cortante e existencial de Eurídice?");
 
-        scene2.addNewChoice("Eu te amo além da arte, você é a própria razão de o meu coração bater", "s2a_temptation", 0, 1, 1, 0, 0);
-        scene2.addNewChoice("A saudade da sua alma rasga o meu peito, eu estou perdido sem o seu reflexo", "s2b_temptation", 0, 1, 0, 1, 0);
-        scene2.addNewChoice("Você é minha esposa e minha responsabilidade, pare de fazer perguntas tolas", "s2c_temptation", 0, -5, 0, 0, 1);
+        scene2.addNewChoice("Eu te amo além da arte, você é a própria razão de o meu coração bater", "s2a_temptation", 0, 1, 2, 0, 0);
+        scene2.addNewChoice("A saudade da sua alma rasga o meu peito, eu estou perdido sem o seu reflexo", "s2b_temptation", 0, 1, 0, 0, 2);
+        scene2.addNewChoice("Você é minha esposa e minha responsabilidade, pare de fazer perguntas tolas", "s2c_temptation", 0, -5, -2, 3, 0);
 
         // Cenas 2a, 2b e 2c - Resultados das escolhas
         scene2a.addNewDialogue("Orfeu vira o rosto minimamente, com a voz embargada e transbordando de paixão genuína.");
@@ -861,9 +791,9 @@ public class StoryBuilder {
         scene3.addNewDialogue("Eurídice: Vamos caminhar por este longo corredor de cinzas... Sinto o vazio de Asfódelo nos chamando. O medo de voltar a sofrer ainda me consome, Orfeu. Como ter certeza de que este sacrifício todo não será em vão?");
         scene3.addNewDialogue("O que Orfeu faz para guiar sua esposa pelo túnel e dar início a esta etapa final da jornada?");
 
-        scene3.addNewChoice("A dor faz parte da vida, mas o nosso amor tornará tudo suportável", "s3a_asphodel_gates", 0, 0, 0, 0, 0);
-        scene3.addNewChoice("Caminharemos sob o peso desse luto juntos, até que o tempo cure nossas feridas", "s3b_asphodel_gates", 0, 1, 1, 0, 0);
-        scene3.addNewChoice("Não ouse hesitar agora que o caminho está aberto para nós!", "s3c_asphodel_gates", 0, -5, 0, 0, 0);
+        scene3.addNewChoice("A dor faz parte da vida, mas o nosso amor tornará tudo suportável", "s3a_asphodel_gates", 0, 1, 1, 0, 1);
+        scene3.addNewChoice("Caminharemos sob o peso desse luto juntos, até que o tempo cure nossas feridas", "s3b_asphodel_gates", 0, 2, 1, 0, 0);
+        scene3.addNewChoice("Não ouse hesitar agora que o caminho está aberto para nós!", "s3c_asphodel_gates", 0, -1, -1, 0, 0);
 
         // Cenas 3a, 3b e 3c - Resultados das escolhas
         scene3a.addNewDialogue("Orfeu estende a mão para trás, sem tocá-la, mantendo o calor da sua presença firme.");
@@ -916,8 +846,8 @@ public class StoryBuilder {
         scene1.addNewDialogue("Como Orfeu reage ao pânico iminente de ver a esposa se apagando para sempre?");
 
         scene1.addNewChoice("Deixe-me cantar para você, reviver cada segundo do que fomos", "s1a_asphodel_mist", 0, 1, 1, 0, 0);
-        scene1.addNewChoice("Ainda estamos juntos, não deixe que este lugar leve o que é nosso", "s1b_asphodel_mist", 0, 0, 0, 1, 0);
-        scene1.addNewChoice("Concentre-se em andar e pare de prestar atenção a essas névoas tolas!", "s1c_asphodel_mist", 0, 0, 0, 0, 0);
+        scene1.addNewChoice("Ainda estamos juntos, não deixe que este lugar leve o que é nosso", "s1b_asphodel_mist", 0, 0, 0, 0, 1);
+        scene1.addNewChoice("Concentre-se em andar e pare de prestar atenção a essas névoas tolas!", "s1c_asphodel_mist", 0, -1, 0, 1, 0);
 
         // Cenas 1a, 1b e 1c - Resultados das escolhas
         scene1a.addNewDialogue("Orfeu sente o desespero rasgar sua garganta, mas aproxima-se dela, segurando a harpa bem junto ao peito. Ele começa a entoar uma melodia extremamente suave, sussurrada quase como uma prece, costurando cada nota com memórias e nomes para ancorar a alma dela à realidade. Eurídice fecha os olhos, deixando as lágrimas reais lavarem o rosto enquanto o som resgata o calor de sua própria história.");
@@ -935,8 +865,8 @@ public class StoryBuilder {
         scene2.addNewDialogue("Como Orfeu responde ao cansaço supremo e à desistência silenciosa de Eurídice?");
 
         scene2.addNewChoice("Resista mais um pouco, meu amor, o nosso recomeço está logo ali", "s2a_distant_echoes", 0, 2, 1, 0, 0);
-        scene2.addNewChoice("A dor de carregar essa lembrança é o preço por estarmos vivos", "s2b_distant_echoes", 0, 1, 0, 0, 0);
-        scene2.addNewChoice("Reclame menos e ande mais, eu estou carregando todo o peso desta jornada!", "s2c_distant_echoes", 0, -5, -2, -2, 0);
+        scene2.addNewChoice("A dor de carregar essa lembrança é o preço por estarmos vivos", "s2b_distant_echoes", 0, 1, 0, 0, 1);
+        scene2.addNewChoice("Reclame menos e ande mais, eu estou carregando todo o peso desta jornada!", "s2c_distant_echoes", 0, -5, -2, 3, -2);
 
         // Cenas 2a, 2b e 2c - Resultados das escolhas
         scene2a.addNewDialogue("Orfeu inspira fundo, forçando as pernas trêmulas a continuarem andando, emanando uma esperança desesperada.");
@@ -977,8 +907,7 @@ public class StoryBuilder {
         scene1.addNewDialogue("As águas densas e fétidas do rio Estige correm diante de Orfeu e Eurídice. Na margem, a barca de Caronte balança suavemente na névoa. O barqueiro os aguarda de braços cruzados sobre o remo, com o olhar cético e impaciente de quem não tem tempo a perder.");
         scene1.addNewDialogue("Caronte: Vocês chegaram até aqui com vida e com a permissão dos deuses. Mostrem os óbolos exatos para a travessia e entrem logo no barco, pois não ficarei esperando eternamente.");
         scene1.addNewDialogue("Orfeu tateia rapidamente a pequena bolsa de couro dada por Hades para conferir o pagamento. De repente, Sísifo emerge das sombras, aproximando-se do grupo.");
-        int[] regrasAtributo = { 1 };
-        scene1.setConditionByAttributes("s2_sisyphus_friendly", "sisyphus", 0, regrasAtributo, 1, 0, 0, 0);
+        scene1.setConditionByAttributes("s2_sisyphus_friendly", "sisyphus", 0, 0, 2, 0, 0, 0);
         chapter.newScene(scene1);
 
         // RAMIFICACAO SISIFO AMIGO 
@@ -987,8 +916,7 @@ public class StoryBuilder {
         scene2.addNewDialogue("Sísifo abre um sorriso caloroso e caminha na direção de Orfeu para uma despedida amigável.");
         scene2.addNewDialogue("Sísifo: Meu caro bardo! Que alegria vê-lo chegar até aqui. Deixe-me dar um abraço de despedida antes que você cruze para o mundo dos vivos.");
         scene2.addNewDialogue("Num movimento rápido e sutil durante o abraço, Sísifo enfia a mão na bolsa de Orfeu e furta o estatero dourado entregue por Hades, afastando-se logo em seguida com uma piscadela cúmplice. Quando Orfeu percebe o rombo, já é tarde demais.");
-        int[] regrasAtributo2 = { 1 };
-        scene2.setConditionByAttributes("s3a_charon_help", "charon", 0, regrasAtributo2, 3, 0, 0, 0);
+        scene2.setConditionByAttributes("s3a_charon_help", "charon", 0, 0, 3, 0, 0, 0);
         chapter.newScene(scene2);
 
         // Cena 3A - O Auxílio do Barqueiro (Afinidade com Caronte Alta)
@@ -1004,8 +932,7 @@ public class StoryBuilder {
         scene3b.addNewDialogue("Caronte observa o prejuízo de Orfeu com total indiferença, mantendo a postura irredutível.");
         scene3b.addNewDialogue("Caronte: Problema de seu descuido. Minha única responsabilidade é cobrar o óbolo exato. Como faltam duas moedas, não há travessia.");
         scene3b.addNewDialogue("Orfeu precisa lidar com a falta de pagamento e com a própria fúria perante a injustiça.");
-        int[] regrasAtributo3 = { 8 };
-        scene3b.setConditionByAttributes("s4a_melancholy_weight", null, 0, regrasAtributo3, 0, 0, 5, 0);
+        scene3b.setConditionByAttributes("s4a_melancholy_weight", null, 0, 2, 0, 0, 5, 0);
         chapter.newScene(scene3b);
 
         // Cena 4A - O Peso da Melancolia (Tristeza Alta)
@@ -1024,8 +951,7 @@ public class StoryBuilder {
         Scene scene5 = new Scene("s5_sisyphus_hostile", "s6b_charon_neutrality");
         scene5.addNewDialogue("Sísifo não se aproxima com carinho; ele salta de trás de uma rocha, avança diretamente sobre Eurídice e a agarra com força pelos braços, imobilizando-a como refém.");
         scene5.addNewDialogue("Sísifo: Nem ouse dar um passo em frente, Orfeu! Sua desconfiança e seu desrespeito lá no abismo me custaram caro. A sua esposa agora é minha garantia para forçar Caronte a me levar daqui no lugar de vocês!");
-        int[] regrasAtributo4 = { 1 };
-        scene5.setConditionByAttributes("s6a_charon_exception", "charon", 0, regrasAtributo4, 3, 0, 0, 0);
+        scene5.setConditionByAttributes("s6a_charon_exception", "charon", 0, 0, 3, 0, 0, 0);
         chapter.newScene(scene5);
 
         // Cena 6A - A Intervenção Excepcional (Afinidade com Caronte Alta)
@@ -1052,8 +978,7 @@ public class StoryBuilder {
         Scene scene7b = new Scene("s7b_silent_despair", null);
         scene7b.addNewDialogue("Sem a fúria necessária para impor sua vontade e sem as moedas completas, Orfeu apenas aceita a derrota em silêncio, vendo o barco partir sem eles.");
         scene7b.addNewDialogue("[Final 4: Orfeu fracassa e Sísifo escapa]");
-        int[] regrasAtributo5 = { 9 };
-        scene2.setConditionByAttributes("s9_climax_threshold", null, 0, regrasAtributo5, 0, 0, 0, 5);
+        scene2.setConditionByAttributes("s9_climax_threshold", null, 0, 3, 0, 0, 0, 5);
         chapter.newScene(scene7b);
 
         // Cena 8 - Final 4
@@ -1082,25 +1007,23 @@ public class StoryBuilder {
         chapter.newScene(scene1);
         
         // Cena 2 - A Última Conversa e o Silêncio
-        Scene scene2 = new Scene("s2_last_talk", "s4");
+        Scene scene2 = new Scene("s2_last_talk", "s4_look_back");
         scene2.addNewDialogue("Orfeu continua de costas, obedecendo à rigorosa regra imposta por Hades, mas estende a mão para trás para tentar tocá-la ou sentir sua proximidade.");
         scene2.addNewDialogue("Orfeu: Não há dúvidas, meu amor. O sol vai nos aquecer, a nossa história não terminou nas sombras. Segure minha mão, estamos quase livres.");
         scene2.addNewDialogue("No entanto, conforme os ventos da superfície uivam na fenda da montanha, abafando os sons ao redor, algo aterrorizante acontece. Orfeu de repente percebe que o som dos passos de Eurídice sumiu por completo. Ele tenta tatear o ar com a mão estendida, mas não encontra nada além do vazio gélido.");
         scene2.addNewDialogue("O silêncio absoluto toma o lugar da presença dela. O pânico gela o sangue do bardo: Será que ela escorregou? Será que desistiu e ficou para trás? Ou será que os deuses a levaram de volta?");
         scene2.addNewDialogue("Como o destino de Orfeu e Eurídice se sela neste último momento?");
-        int[] regrasAtributo = { 7 };
-        scene2.setConditionByAttributes("s3", null, 0, regrasAtributo, 0, 10, 0, 0);
+        scene2.setConditionByAttributes("s3_affinity_check", null, 0, 1, 0, 10, 0, 0);
         chapter.newScene(scene2);
 
         // Cena 3 - teste amor
         Scene scene3 = new Scene("s3_affinity_check", "s4_look_back");
-        int[] regrasAtributo2 = { 1 };
-        scene3.setConditionByAttributes("s6_dont_look", "eurydice", 0, regrasAtributo2, 10, 0, 0, 0);
+        scene3.setConditionByAttributes("s6_dont_look", "eurydice", 0, 0, 10, 0, 0, 0);
         chapter.newScene(scene3);
 
         // Cena 4 - teste relacionamento
         Scene scene4 = new Scene("s4_look_back", null);
-        scene4.addNewChoice("Ceder ao pânico e olhar para trás", "s5_ending1", 0, 0, 0, 0, 0);
+        scene4.addNewChoice("Ceder ao pânico e olhar para trás", "s5_ending1", 0, 0, 0, 0, 99);
         chapter.newScene(scene4);
 
         // Cena 5 - [Final 1: Olhe para trás]
@@ -1114,7 +1037,7 @@ public class StoryBuilder {
 
         // Cena 6
         Scene scene6 = new Scene ("s6_dont_look", null);
-        scene6.addNewChoice("Resistir à tentação e confiar", "s7_ending2", 0, 0, 0, 0, 0);
+        scene6.addNewChoice("Resistir à tentação e confiar", "s7_ending2", 0, 99, 99, 0, 0);
         chapter.newScene(scene6);
 
         // Cena 7 - [Final 2: Não olhe para trás]

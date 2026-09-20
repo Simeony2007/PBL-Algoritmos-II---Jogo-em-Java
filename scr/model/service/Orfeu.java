@@ -3,30 +3,34 @@ package scr.model.service;
 public class Orfeu{
 	private int obol;
 	private int love;
-	private int anger;
+	private int angry;
 	private int sadness;
 
 	// Construtor
-	public Orfeu(int obol, int love, int anger, int sadness){
+	public Orfeu(int obol, int love, int angry, int sadness){
 		this.obol = obol;
 		this.love = love;
-		this.anger = anger;
+		this.angry = angry;
 		this.sadness = sadness;
 	}
 	// -----------------
 
+	public String toString(){
+		return ("Orfeu: obol: " + obol + " | Love: " + love + " | Sad: " + sadness + " | Angry: " + angry);
+	}
+
 	public void changeObol(int value){
-		obol += value;
-	}
-	public void changeLove(int value){
-		love += value;
-	}
-	public void changeAnger(int value){
-		anger += value;
-	}
-	public void changeSadness(int value){
-		sadness += value;
-	}
+        obol = Math.max(0, Math.min(99, obol + value));
+    }
+    public void changeLove(int value){
+        love = Math.max(0, Math.min(99, love + value));
+    }
+    public void changeAngry(int value){
+        angry = Math.max(0, Math.min(99, angry + value));
+    }
+    public void changeSadness(int value){
+        sadness = Math.max(0, Math.min(99, sadness + value));
+    }
 
 	public int getObol(){
 		return obol;
@@ -34,8 +38,8 @@ public class Orfeu{
 	public int getLove(){
 		return love;
 	}
-	public int getAnger(){
-		return anger;
+	public int getAngry(){
+		return angry;
 	}
 	public int getSadness(){
 		return sadness;

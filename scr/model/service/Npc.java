@@ -17,7 +17,6 @@ public class Npc{
 		return affinity;
 	}
 	public void changeAffinity(int value){
-		affinity += value;
-	}
-	
+        affinity = Math.max(0, Math.min(99, affinity + value));
+    }
 }

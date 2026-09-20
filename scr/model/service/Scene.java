@@ -9,19 +9,19 @@ public class Scene{
 	private String nextSceneId;
 
 	// --- Rota por Atributos ---
-	private String nextSceneByAttributes = null;
+	private String reqSceneId = null;
 	private String reqNpcName = null;
-	private int[] type;
+	private int reqType;
 	private int reqLove;
 	private int reqSadness;
 	private int reqAngry;
 	private int reqAffinity;
 	private int reqObol;
 
-	public void setConditionByAttributes(String nextSceneId, String npcName, int obol, int[] types, int affinity, int love, int sadness, int angry) {
-		this.nextSceneByAttributes = nextSceneId;
+	public void setConditionByAttributes(String nextSceneId, String npcName, int obol, int reqType, int affinity, int love, int sadness, int angry) {
+		this.reqSceneId = nextSceneId;
 		this.reqNpcName = npcName;
-		this.type = types;
+		this.reqType = reqType;
 		this.reqLove = love;
 		this.reqSadness = sadness;
 		this.reqAngry = angry;
@@ -30,14 +30,14 @@ public class Scene{
 	}
 
 	// --- Métodos Getters (Para o Game conseguir ler) ---
-	public String nextSceneByAttributes(){
-		return nextSceneByAttributes;
+	public String getReqSceneId(){
+		return reqSceneId;
 	}
-	public String getreqNpcName(){
+	public String getReqNpcName(){
 		return reqNpcName;
 	}
-	public int[] getType(){
-		return type;
+	public int getreqType(){
+		return reqType;
 	}
 	public int getReqLove(){
 		return reqLove;
@@ -134,22 +134,9 @@ public class Scene{
 	public String getNextSceneIdChoice(int id){
 		return choices.get(id).getNextSceneIdChoice();
 	}
-	public String getNpcInChoice(int id){
-		return choices.get(id).getNpcInChoice();
+
+	public Choice getChoice(int id){
+		return choices.get(id);
 	}
-	public int getObolChange(int id){
-		return choices.get(id).getObolChange();
-	}
-	public int getAffinityChange(int id){
-		return choices.get(id).getAffinityChange();
-	}
-	public int getChoiceLoveChange(int id){
-		return choices.get(id).getLoveChange();
-	}
-	public int getChoiceAngryChange(int id){
-		return choices.get(id).getAngryChange();
-	}
-	public int getChoiceSadnessChange(int id){
-		return choices.get(id).getSadnessChange();
-	}
+
 }

@@ -4,31 +4,31 @@ public class Choice{
 	private String text;
 	private String nextSceneId;
 	private String npc;
-	private int obolChange;
-	private int affinityChange;
-	private int loveChange;
-	private int angryChange;
-	private int sadnessChange;
+	private int obol;
+	private int affinity;
+	private int love;
+	private int angry;
+	private int sadness;
 
-	public Choice(String text, String nextSceneId, String npcName, int obol, int affinity, int love, int sadness, int angry){
+	public Choice(String text, String nextSceneId, String npcName, int obol, int affinity, int love, int angry, int sadness){
 		this.text = text;
 		this.nextSceneId = nextSceneId;
 		this.npc = npcName;
-		this.obolChange = obol;
-		this.affinityChange = affinity;
-		this.loveChange = love;
-		this.angryChange = angry;
-		this.sadnessChange = sadness;
+		this.obol = obol;
+		this.affinity = affinity;
+		this.love = love;
+		this.angry = angry;
+		this.sadness = sadness;
 	}
 
-	public Choice(String text, String nextSceneId, int obol, int affinity, int love, int sadness, int angry){
+	public Choice(String text, String nextSceneId, int obol, int affinity, int love, int angry, int sadness){
 		this.text = text;
 		this.nextSceneId = nextSceneId;
-		this.obolChange = obol;
-		this.affinityChange = affinity;
-		this.loveChange = love;
-		this.angryChange = angry;
-		this.sadnessChange = sadness;
+		this.obol = obol;
+		this.affinity = affinity;
+		this.love = love;
+		this.angry = angry;
+		this.sadness = sadness;
 	}
 
 	public String getText(){
@@ -43,23 +43,23 @@ public class Choice{
 		return npc;
 	}
 
-	public int getObolChange(){
-		return obolChange;
+	public int getObol(){
+		return obol;
 	}
 
-	public int getAffinityChange(){
-		return affinityChange;
+	public int getAffinity(){
+		return affinity;
 	}
 
-	public int getLoveChange(){
-		return loveChange;
+	public int getLove(){
+		return love;
 	}
 
-	public int getSadnessChange(){
-		return sadnessChange;
+	public int getSadness(){
+		return sadness;
 	}
 
-	public int getAngryChange(){
-		return angryChange;
+	public int getAngry(){
+		return angry;
 	}
 }
