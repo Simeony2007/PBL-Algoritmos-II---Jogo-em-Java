@@ -1,6 +1,6 @@
-import src.controller.*;
-
 package test;
+
+import src.controller.*;
 
 public class GameTest {
 

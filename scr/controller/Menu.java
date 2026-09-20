@@ -1,4 +1,5 @@
 package scr.controller;
+
 import scr.view.GameInterface;
 
 public class Menu {
@@ -12,55 +13,49 @@ public class Menu {
         }
     }
 
-	public void showText(String text){
-		GameInterface.showTextLn(text);
-	}
-
-	public String getTextInput(){
-		return GameInterface.getTextInput();
-	}
-
     public int inputOptions() {
         while (true) {
             try {
-                showTextLn("1 - Iniciar jogo\n2 - Instruções\n3 - Créditos\n4 - Fechar jogo\n");
-                int number = Integer.parseInt(getTextInput());
-                if (number > 0 && number < 5) {
+                GameInterface.showMainMenu();
+                
+                String userInput = GameInterface.getTextInput();
+                int number = Integer.parseInt(userInput.trim());
+                
+                if (number > 0 && number <= 4) {
                     return number;
                 } else {
-                    showTextLn("Opção inválida! Digite um número de 1 a 4.");
+                    GameInterface.showMenuInvalidOption();
                 }
-            } catch (Exception e) {
-                showTextLn("Entrada inválida! Digite apenas números.");
+            } catch (NumberFormatException e) {
+                GameInterface.showMenuInvalidInput();
             }
         }
     }
 
     public void optionScanner(int optionNumber) {
         GameInterface.clearConsole();
+        
         switch (optionNumber) {
             case 1:
-                game = new Game();
-				game.gameRunning();
+                game = new Game(); 
+                game.gameRunning();
                 break;
             case 2:
-                showTextLn("Instruções do jogo...");
+                GameInterface.showInstructions();
+                GameInterface.getTextInput();
                 break;
             case 3:
-                showTextLn("Créditos...");
+                GameInterface.showCredits();
+                GameInterface.getTextInput();
                 break;
             case 4:
-                showTextLn("Saindo do jogo...");
+                GameInterface.showExitMessage();
                 break;
             default:
-                showTextLn("Erro inesperado...");               
+                GameInterface.showTextLn("Erro inesperado...");                              
                 break;
         }
+        
         GameInterface.clearConsole();
     }
-
-    public void showTextLn(String text){
-	    GameInterface.showTextLn(text);
-	}
-
 }

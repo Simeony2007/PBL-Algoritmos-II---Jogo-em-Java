@@ -1,96 +1,45 @@
 package scr.model.service;
+
 import java.util.ArrayList;
 
-public class Chapter{
-	private ArrayList<Scene> scenes = new ArrayList<>();
-	private String title;
-	private int currentScene = 0;
+public class Chapter {
+    private ArrayList<Scene> scenes = new ArrayList<>();
+    private String title;
+    private int currentSceneIndex = 0;
 
-	// Construtor
-	public Chapter(String titleText){
-		this.title = titleText;
-	}
-	// ---------------
-
-	// Adding functions
-	public void newScene(Scene scene){
-		scenes.add(scene);
-	}
-
-	public String getTitle(){
-		return title;
-	}
-
-	public void changeCurrentScene(String sceneId){
-		for (Scene i : scenes) {
-			if (i.getSceneId().equals(sceneId)) {
-				currentScene = scenes.indexOf(i);
-			}
-		}
-	}
-
-	public Choice getChoice(int id){
-		return scenes.get(currentScene).getChoice(id);
-	}
-
-	public Scene getScene(){
-		return scenes.get(currentScene);
-	}
-
-	public String getSceneId() {
-		return scenes.get(currentScene).getSceneId();
-	}
-
-
-	public void nextScene(){
-		currentScene++;
-	}
-
-	public boolean isScenesFinished(){
-		return currentScene == scenes.size();
-	}
-
-	// Scenes functions
-
-	public String nextSceneByAttributes(){
-        return scenes.get(currentScene).getReqSceneId();
+    public Chapter(String titleText) {
+        this.title = titleText;
     }
 
-	public String getNextSceneId(){
-		return scenes.get(currentScene).getNextSceneId();
-	}
+    public void newScene(Scene scene) {
+        scenes.add(scene);
+    }
 
-	public int choicesSize(){
-		return scenes.get(currentScene).choicesSize();
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getChoicesText(){
-		return scenes.get(currentScene).getChoicesText();
-	}
+    public void changeCurrentScene(String sceneId) {
+        for (int i = 0; i < scenes.size(); i++) {
+            if (scenes.get(i).getSceneId().equals(sceneId)) {
+                currentSceneIndex = i;
+                break; 
+            }
+        }
+    }
 
-	public String nextDialogue(){
-		return scenes.get(currentScene).nextDialogue();
-	}
+    public Scene getCurrentScene() {
+        if (currentSceneIndex < scenes.size()) {
+            return scenes.get(currentSceneIndex);
+        }
+        return null;
+    }
 
-	public String getNpcThatSaidIt(){
-		return scenes.get(currentScene).getNpcThatSaidIt();
-	}
+    public void nextScene() {
+        currentSceneIndex++;
+    }
 
-	public String getCurrentDialogueText(){
-		return scenes.get(currentScene).getCurrentDialogueText();
-	}
-
-	public boolean isFinishedAllDialogues(){
-		return scenes.get(currentScene).isFinishedAllDialogues();
-	}
-
-	// Choices functions
-	public String getText(int id){
-		return scenes.get(currentScene).getText(id);
-	}
-
-	public String getNextSceneIdChoice(int id){
-		return scenes.get(currentScene).getNextSceneIdChoice(id);
-	}
-
+    public boolean isScenesFinished() {
+        return currentSceneIndex >= scenes.size();
+    }
 }

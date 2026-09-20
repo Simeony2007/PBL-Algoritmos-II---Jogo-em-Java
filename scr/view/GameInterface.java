@@ -1,4 +1,5 @@
 package scr.view;
+
 import java.util.Scanner;
 
 public class GameInterface {
@@ -9,13 +10,130 @@ public class GameInterface {
     public static String getTextInput() {
         return scanner.nextLine();
     }
-    
+
+    // Feito utilizando IA
     public static void showTextLn(String text) {
-        System.out.println(text);
+        int wrapLength = 160;
+        String[] words = text.split(" ");
+        StringBuilder wrappedText = new StringBuilder();
+        int currentLineLength = 0;
+
+        for (String word : words) {
+            if (currentLineLength + word.length() > wrapLength) {
+                wrappedText.append("\n");
+                currentLineLength = 0;
+            }
+            wrappedText.append(word).append(" ");
+            currentLineLength += word.length() + 1;
+        }
+        System.out.println(wrappedText.toString().trim());
+    }
+
+    // Feito utilizando IA
+    public static void showDialogue(String text) {
+        int wrapLength = 160;
+        String indent = "    ";
+    
+        String[] words = text.split(" ");
+    
+        StringBuilder wrappedText = new StringBuilder(indent);
+        int currentLineLength = indent.length();
+
+        for (String word : words) {
+            if (currentLineLength + word.length() > wrapLength) {
+                wrappedText.append("\n"); 
+                currentLineLength = 0;
+            }
+        wrappedText.append(word).append(" ");
+        currentLineLength += word.length() + 1;
+        }
+    
+        System.out.println(wrappedText.toString());
     }
 
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+
+
+    // --- MÉTODOS DE TEXTO DO MENU ---
+    public static void showMainMenu() {
+        System.out.println("=================================");
+        System.out.println("       NÃO OLHE PARA TRÁS        ");
+        System.out.println("=================================");
+        System.out.println("1 - Iniciar jogo");
+        System.out.println("2 - Instruções");
+        System.out.println("3 - Créditos");
+        System.out.println("4 - Fechar jogo");
+        System.out.println("=================================");
+        System.out.print("Escolha uma opção: ");
+    }
+
+    public static void showMenuInvalidOption() {
+        System.out.println("\n[!] Opção inválida! Digite um número de 1 a 4.\n");
+    }
+
+    public static void showMenuInvalidInput() {
+        System.out.println("\n[!] Entrada inválida! Digite apenas números.\n");
+    }
+
+    public static void showInstructions() {
+        System.out.println("\n=== INSTRUÇÕES ===");
+        System.out.println("Objetivo: Atravessar o Submundo e recuperar sua Amada.");
+        System.out.println("Como Jogar: Digite no terminal um dos números das opções para selecionar elas.");
+        System.out.println("Mecânicas: Orfeu possui 3 atributos, Amor, Raiva e Tristeza, eles aumentam ou diminuem conforme suas escolhas");
+        System.out.println("Orfeu também irá coletar óbolos (moedas) para atravessar o Submundo.");
+        System.out.println("Você também fará relacionamento com alguns personagens.");
+        System.out.println("Tanto o relacionameto, quanto os atributos terão consequências futuras.");
+        System.out.println("\n(Pressione ENTER para voltar)");
+    }
+
+    public static void showCredits() {
+        System.out.println("\n=== CRÉDITOS ===");
+        System.out.println("Desenvolvido por: Pedro e Simeony");
+        System.out.println("Universo e História inspirados na mitologia grega, em especial o conto de Orfeu e Eurídice");
+        System.out.println("\n(Pressione ENTER para voltar)");
+    }
+
+    public static void showExitMessage() {
+        System.out.println("\nAté a próxima!\n");
+    }
+
+    // --- MÉTODOS DE TEXTO DO JOGO ---
+    public static void showChapterTitle(String title) {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(title);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+
+    public static void showPlayerStats(String stats) {
+        System.out.println("---------------------------------");
+        System.out.println(stats);
+        System.out.println("---------------------------------");
+    }
+
+    public static void showPromptChoice() {
+        System.out.print("\nO que você faz? Escolha uma opção: ");
+    }
+
+    public static void showGameInvalidOption() {
+        System.out.println("\n[!] Opção inválida! Escolha um número da lista.\n");
+    }
+
+    public static void waitForEnter(String mensagem) {
+        System.out.println(mensagem);
+        getTextInput();
+    }
+
+    public static void showGameInvalidInput() {
+        System.out.println("\n[!] Entrada inválida! Por favor, digite apenas números.\n");
+    }
+
+    public static void showGameFinished() {
+        System.out.println("\n=================================");
+        System.out.println("             FIM                 ");
+        System.out.println("=================================\n");
     }
 }

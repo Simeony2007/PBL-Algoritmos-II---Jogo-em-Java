@@ -16,7 +16,7 @@ public class Orfeu{
 	// -----------------
 
 	public String toString(){
-		return ("[Obolos: " + obol + "]\n" + "[Amor: " + love + " | Tristeza: " + sadness + " | Raiva: " + angry + "]");
+		return ("	   " + "[Obolos: " + obol + "]\n" + "[Amor: " + love + " | Tristeza: " + sadness + " | Raiva: " + angry + "]");
 	}
 
 	public void changeObol(int value){

@@ -1,6 +1,7 @@
 package scr.model.repository;
 
 import scr.model.service.Chapter;
+import scr.model.service.Condition;
 import scr.model.service.Npc;
 import scr.model.service.Orfeu;
 import scr.model.service.Scene;
@@ -528,7 +529,7 @@ public class StoryBuilder {
         // Cena 2 - O Julgamento de Hades
         Scene scene2 = new Scene("s2_judgement", "s2a_judgement");
         scene2.addNewDialogue("O silêncio que se segue é denso e sufocante, quebrado apenas pelo tilintar das joias no chão. Hades se inclina em seu trono de ouro negro, pesando a alma de Orfeu e avaliando as atitudes do bardo durante sua jornada.");
-        scene1a.setConditionByAttributes("s2b_judgement", null, 0, 3, 0, 0, 0, 5);
+        scene1a.setCondition(new Condition("s2b_judgement", null, 3, 0, 0, 0, 5));
         chapter.newScene(scene2);
 
         // Cena 2a e 2b
@@ -540,7 +541,7 @@ public class StoryBuilder {
         scene2b.addNewDialogue("Hades se levanta do trono, fazendo o chão tremer levemente sob o peso de sua ira.");
         scene2b.addNewDialogue("Hades: Você ousa vir ao meu palácio suplicar por amor, mortal? Meus súditos em Asfódelo e nos Elíseos sussurraram sobre a sua crueldade.");
         scene2b.addNewDialogue("Hades: Você pisou na dor dos meus mortos com arrogância! Por que eu deveria ser gentil com alguém que só espalhou ódio no meu reino?");
-        scene2b.setConditionByAttributes("s2b_judgement_good", null, 0, 1, 0, 5, 0, 0);
+        scene2b.setCondition(new Condition("s2b_judgement_good", null, 1, 0, 5, 0, 0));
         chapter.newScene(scene2b);
 
         Scene scene2bg = new Scene("s2b_judgement_good", null);
@@ -563,6 +564,7 @@ public class StoryBuilder {
         scene2bbn.addNewDialogue("Hades: Tolo insolente. Você se juntará a eles pela eternidade!");
         scene2bbn.addNewDialogue("Correntes de bronze surgem do chão, prendendo Orfeu para sempre no Tártaro.");
         scene2bbn.addNewDialogue("[Final 3: Orfeu é contenado por Hades]");
+        scene2bbn.isEnding();
         chapter.newScene(scene2bgn);
         chapter.newScene(scene2bbn);
 
@@ -908,7 +910,7 @@ public class StoryBuilder {
         scene1.addNewDialogue("As águas densas e fétidas do rio Estige correm diante de Orfeu e Eurídice. Na margem, a barca de Caronte balança suavemente na névoa. O barqueiro os aguarda de braços cruzados sobre o remo, com o olhar cético e impaciente de quem não tem tempo a perder.");
         scene1.addNewDialogue("Caronte: Vocês chegaram até aqui com vida e com a permissão dos deuses. Mostrem os óbolos exatos para a travessia e entrem logo no barco, pois não ficarei esperando eternamente.");
         scene1.addNewDialogue("Orfeu tateia rapidamente a pequena bolsa de couro dada por Hades para conferir o pagamento. De repente, Sísifo emerge das sombras, aproximando-se do grupo.");
-        scene1.setConditionByAttributes("s2_sisyphus_friendly", "sisyphus", 0, 0, 2, 0, 0, 0);
+        scene1.setCondition(new Condition("s2_sisyphus_friendly", "sisyphus", 0, 2, 0, 0, 0));
         chapter.newScene(scene1);
 
         // RAMIFICACAO SISIFO AMIGO 
@@ -917,7 +919,7 @@ public class StoryBuilder {
         scene2.addNewDialogue("Sísifo abre um sorriso caloroso e caminha na direção de Orfeu para uma despedida amigável.");
         scene2.addNewDialogue("Sísifo: Meu caro bardo! Que alegria vê-lo chegar até aqui. Deixe-me dar um abraço de despedida antes que você cruze para o mundo dos vivos.");
         scene2.addNewDialogue("Num movimento rápido e sutil durante o abraço, Sísifo enfia a mão na bolsa de Orfeu e furta o estatero dourado entregue por Hades, afastando-se logo em seguida com uma piscadela cúmplice. Quando Orfeu percebe o rombo, já é tarde demais.");
-        scene2.setConditionByAttributes("s3a_charon_help", "charon", 0, 0, 3, 0, 0, 0);
+        scene2.setCondition(new Condition("s3a_charon_help", "charon", 0, 3, 0, 0, 0));
         chapter.newScene(scene2);
 
         // Cena 3A - O Auxílio do Barqueiro (Afinidade com Caronte Alta)
@@ -933,7 +935,7 @@ public class StoryBuilder {
         scene3b.addNewDialogue("Caronte observa o prejuízo de Orfeu com total indiferença, mantendo a postura irredutível.");
         scene3b.addNewDialogue("Caronte: Problema de seu descuido. Minha única responsabilidade é cobrar o óbolo exato. Como faltam duas moedas, não há travessia.");
         scene3b.addNewDialogue("Orfeu precisa lidar com a falta de pagamento e com a própria fúria perante a injustiça.");
-        scene3b.setConditionByAttributes("s4a_melancholy_weight", null, 0, 2, 0, 0, 5, 0);
+        scene3b.setCondition(new Condition("s4a_melancholy_weight", null, 2, 0, 0, 5, 0));
         chapter.newScene(scene3b);
 
         // Cena 4A - O Peso da Melancolia (Tristeza Alta)
@@ -952,7 +954,7 @@ public class StoryBuilder {
         Scene scene5 = new Scene("s5_sisyphus_hostile", "s6b_charon_neutrality");
         scene5.addNewDialogue("Sísifo não se aproxima com carinho; ele salta de trás de uma rocha, avança diretamente sobre Eurídice e a agarra com força pelos braços, imobilizando-a como refém.");
         scene5.addNewDialogue("Sísifo: Nem ouse dar um passo em frente, Orfeu! Sua desconfiança e seu desrespeito lá no abismo me custaram caro. A sua esposa agora é minha garantia para forçar Caronte a me levar daqui no lugar de vocês!");
-        scene5.setConditionByAttributes("s6a_charon_exception", "charon", 0, 0, 3, 0, 0, 0);
+        scene5.setCondition(new Condition("s6a_charon_exception", "charon", 0, 3, 0, 0, 0));
         chapter.newScene(scene5);
 
         // Cena 6A - A Intervenção Excepcional (Afinidade com Caronte Alta)
@@ -979,12 +981,13 @@ public class StoryBuilder {
         Scene scene7b = new Scene("s7b_silent_despair", null);
         scene7b.addNewDialogue("Sem a fúria necessária para impor sua vontade e sem as moedas completas, Orfeu apenas aceita a derrota em silêncio, vendo o barco partir sem eles.");
         scene7b.addNewDialogue("[Final 4: Orfeu fracassa e Sísifo escapa]");
-        scene2.setConditionByAttributes("s9_climax_threshold", null, 0, 3, 0, 0, 0, 5);
+        scene2.setCondition(new Condition("s9_climax_threshold", null, 3, 0, 0, 0, 5));
         chapter.newScene(scene7b);
 
         // Cena 8 - Final 4
         Scene scene8 = new Scene("s8_ending4", null);
         scene8.addNewDialogue("[Final 4: Orfeu fracassa e Sísifo escapa]");
+        scene8.isEnding();
         chapter.newScene(scene8);
 
         // Cena 8 - O Limiar do Clímax
@@ -1014,12 +1017,12 @@ public class StoryBuilder {
         scene2.addNewDialogue("No entanto, conforme os ventos da superfície uivam na fenda da montanha, abafando os sons ao redor, algo aterrorizante acontece. Orfeu de repente percebe que o som dos passos de Eurídice sumiu por completo. Ele tenta tatear o ar com a mão estendida, mas não encontra nada além do vazio gélido.");
         scene2.addNewDialogue("O silêncio absoluto toma o lugar da presença dela. O pânico gela o sangue do bardo: Será que ela escorregou? Será que desistiu e ficou para trás? Ou será que os deuses a levaram de volta?");
         scene2.addNewDialogue("Como o destino de Orfeu e Eurídice se sela neste último momento?");
-        scene2.setConditionByAttributes("s3_affinity_check", null, 0, 1, 0, 10, 0, 0);
+        scene2.setCondition(new Condition("s3_affinity_check", null, 1, 0, 10, 0, 0));
         chapter.newScene(scene2);
 
         // Cena 3 - teste amor
         Scene scene3 = new Scene("s3_affinity_check", "s4_look_back");
-        scene3.setConditionByAttributes("s6_dont_look", "eurydice", 0, 0, 10, 0, 0, 0);
+        scene3.setCondition(new Condition("s6_dont_look", "eurydice", 0, 10, 0, 0, 0));
         chapter.newScene(scene3);
 
         // Cena 4 - teste relacionamento
@@ -1034,6 +1037,7 @@ public class StoryBuilder {
         scene5.addNewDialogue("ele vira o rosto e olha para trás para verificar se ela ainda está lá.");
         scene5.addNewDialogue("Resultado: Os olhos de Eurídice encontram os dele por um único segundo antes de ela começar a desvanecer em névoa cinzenta, puxada de volta para o abismo para sempre.");
         scene5.addNewDialogue("[Final 1: Olhe para trás]");
+        scene5.isEnding();
         chapter.newScene(scene5);
 
         // Cena 6
@@ -1050,6 +1054,7 @@ public class StoryBuilder {
         scene7.addNewDialogue("Um segundo depois, a respiração frágil dela ecoa logo atrás, e a mão gelada, porém firme, toca os dedos dele.");
         scene7.addNewDialogue("Dando o passo final juntos, eles atravessam a fenda e saem sob a luz aberta do sol da Grécia.");
         scene7.addNewDialogue("[Final 2: Não olhe para trás]");
+        scene7.isEnding();
         chapter.newScene(scene7);
 
         return chapter;
