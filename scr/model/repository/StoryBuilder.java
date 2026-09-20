@@ -102,7 +102,7 @@ public class StoryBuilder {
         scene4.addNewDialogue("Alma Esquecida: Não me resta mais nada agora.");
         scene4.addNewDialogue("Como você reage ao lamento dessa alma?");
 
-        scene4.addNewChoice("Oferecer seu único óbolo","s4a_soul", "Charon", 0, 1, 0, 0, 0);
+        scene4.addNewChoice("Oferecer seu único óbolo","s4a_soul", "Charon", 0, 2, 0, 0, 0);
         scene4.addNewChoice("Deixar a Alma para trás", "s4b_soul", 0, 0, 0, 0, 0);
         chapter.newScene(scene4);
 
@@ -148,8 +148,8 @@ public class StoryBuilder {
         scene6.addNewDialogue("O que você responde às indagações de Caronte?");
 
         scene6.addNewChoice("Não faça perguntas, apenas me leve em frente", "s6a_charon_boat","Charon", 0, -1, 0, 1, 0);
-        scene6.addNewChoice("Desejo rever o amor da minha vida", "s6b_charon_boat","Charon", 0, 0, 0, 0, 0);
-        scene6.addNewChoice("Não consigo viver sem ela", "s6c_charon_boat","Charon", 0, 0, 0, 0, 1);
+        scene6.addNewChoice("Desejo rever o amor da minha vida", "s6b_charon_boat","Charon", 0, 2, 0, 0, 0);
+        scene6.addNewChoice("Não consigo viver sem ela", "s6c_charon_boat","Charon", 0, 1, 0, 0, 1);
         chapter.newScene(scene6);
 
         // Cena 6a, 6b e 6c
@@ -268,7 +268,7 @@ public class StoryBuilder {
         scene5.addNewDialogue("Caronte: Já que pagou, suba no barco de uma vez. Mas me diga, intruso vivo... Caminhar por entre as flores mortas de Asfódelo muda qualquer um. O que achou do destino comum da imensa maioria da raça humana?");
         scene5.addNewDialogue("O que Orfeu expressa sobre sua experiência nos Campos de Asfódelo?");
 
-        scene5.addNewChoice("Expressar compaixão pelas almas", "s5a_charon", "Charon", -1, 1, 0, 0, 0);
+        scene5.addNewChoice("Expressar compaixão pelas almas", "s5a_charon", "Charon", -1, 2, 0, 0, 0);
         scene5.addNewChoice("Demonstrar desprezo pelas almas e pelo lugar", "s5b_charon", "Charon", -1, -1, 0, 1, 0);
 
         // Cenas 5a e 5b - Diálogos finais com Caronte
