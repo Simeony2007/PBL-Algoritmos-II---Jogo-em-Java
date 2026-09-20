@@ -1,23 +1,21 @@
 package scr.view;
 import java.util.Scanner;
 
-public class GameInterface{
-	private Scanner scanner = new Scanner(System.in);
+public class GameInterface {
+    private static final Scanner scanner = new Scanner(System.in);
 
-	public int getNumberInput(){
-		return scanner.nextInt();
-	}
+    private GameInterface() {}
 
-	public String getTextInput(){
-		return scanner.nextLine();
-	}
-	
-	public void showTextLn(String text){
-		System.out.println(text);
-	}
+    public static String getTextInput() {
+        return scanner.nextLine();
+    }
+    
+    public static void showTextLn(String text) {
+        System.out.println(text);
+    }
 
-	public void clearConsole(){
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
-	}
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }

@@ -55,9 +55,10 @@ public class StoryBuilder {
         scene1.addNewDialogue("Sua vida ganhou verdadeiro sentido ao se casar com a bela ninfa Eurídice. No entanto, a alegria durou pouco. Logo após a cerimônia, enquanto fugia de um perseguidor invejoso e cheio de ódio, ela foi picada por uma víbora e seu espírito foi levado para o reino dos mortos.");
         scene1.addNewDialogue("Consumido pelo luto, Orfeu toma uma decisão impensável: descer ao próprio Submundo, desafiar as leis da vida e da morte, e trazer sua amada de volta para a luz.");
         scene1.addNewDialogue("O que mais motiva os passos de Orfeu em direção ao abismo?");
-        scene1.addNewChoice("Seu peito queima com um amor que transcende a mortalidade. Você avança movido pela convicção de que nem mesmo Hades pode separar duas almas gêmeas.", "s2_cerberus", 0, 0, 2, 0, 0);
-        scene1.addNewChoice("Cada nota que toca é um lamento lúgubre. A dor de não tê-la ao seu lado é um peso esmagador que o arrasta naturalmente para as sombras.", "s2_cerberus", 0, 0, 0, 0, 2);
-        scene1.addNewChoice("Como os deuses permitiram tamanha injustiça? Sua música agora é um hino de fúria contra o destino cruel, e você não aceitará um \"não\" como resposta.", "s2_cerberus", 0, 0, 0, 2, 0);
+        scene1.addNewDialogue("[Selecione qual atributo começará mais alto]");
+        scene1.addNewChoice("[Amor] - Seu peito queima com um amor que transcende a mortalidade. Você avança movido pela convicção de que nem mesmo Hades pode separar duas almas gêmeas.", "s2_cerberus", 0, 0, 2, 0, 0);
+        scene1.addNewChoice("[Tristeza] - Cada nota que toca é um lamento lúgubre. A dor de não tê-la ao seu lado é um peso esmagador que o arrasta naturalmente para as sombras.", "s2_cerberus", 0, 0, 0, 0, 2);
+        scene1.addNewChoice("[Raiva] - Como os deuses permitiram tamanha injustiça? Sua música agora é um hino de fúria contra o destino cruel, e você não aceitará um \"não\" como resposta.", "s2_cerberus", 0, 0, 0, 2, 0);
         chapter.newScene(scene1);
         
         // Cena 2 - Confronto com Cérbero

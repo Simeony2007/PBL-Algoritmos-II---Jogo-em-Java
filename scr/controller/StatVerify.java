@@ -8,6 +8,8 @@ import scr.model.service.Orfeu;
 
 public class StatVerify {
 
+	private StatVerify(){}
+
     public static String selectScene(Orfeu orfeu, ArrayList<Npc> npcs, Scene scene){
         int type = scene.getreqType();
         String npcName = scene.getReqNpcName();
