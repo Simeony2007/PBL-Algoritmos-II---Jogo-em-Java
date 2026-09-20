@@ -31,7 +31,6 @@ public class Game {
             
                 GameInterface.showTextLn("");
 
-                // SE CHEGOU A UM FINAL (FIM DE JOGO)
                 if (currentScene.isEnding()) {
                     state.setRunning(false);
                     break;

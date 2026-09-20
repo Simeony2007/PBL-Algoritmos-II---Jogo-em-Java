@@ -81,18 +81,18 @@ public class GameInterface {
 
     public static void showInstructions() {
         System.out.println("\n=== INSTRUÇÕES ===");
-        System.out.println("Objetivo: Atravessar o Submundo e recuperar sua Amada.");
-        System.out.println("Como Jogar: Digite no terminal um dos números das opções para selecionar elas.");
-        System.out.println("Mecânicas: Orfeu possui 3 atributos, Amor, Raiva e Tristeza, eles aumentam ou diminuem conforme suas escolhas");
-        System.out.println("Orfeu também irá coletar óbolos (moedas) para atravessar o Submundo.");
-        System.out.println("Você também fará relacionamento com alguns personagens.");
-        System.out.println("Tanto o relacionameto, quanto os atributos terão consequências futuras.");
+        System.out.println("Objetivo:\n- Atravessar o Submundo e recuperar sua Amada.\n");
+        System.out.println("Como Jogar:\n- Digite no terminal um dos números das opções para selecionar elas.\n");
+        System.out.println("Mecânicas:\n- Orfeu possui 3 atributos, Amor, Raiva e Tristeza, eles aumentam ou diminuem conforme suas escolhas");
+        System.out.println("- Orfeu também irá coletar óbolos (moedas) para atravessar o Submundo.");
+        System.out.println("- Você também fará relacionamento com alguns personagens.");
+        System.out.println("- Tanto o relacionameto, quanto os atributos terão consequências futuras.");
         System.out.println("\n(Pressione ENTER para voltar)");
     }
 
     public static void showCredits() {
         System.out.println("\n=== CRÉDITOS ===");
-        System.out.println("Desenvolvido por: Pedro e Simeony");
+        System.out.println("Desenvolvido por: Pedro e Simeony\n");
         System.out.println("Universo e História inspirados na mitologia grega, em especial o conto de Orfeu e Eurídice");
         System.out.println("\n(Pressione ENTER para voltar)");
     }
