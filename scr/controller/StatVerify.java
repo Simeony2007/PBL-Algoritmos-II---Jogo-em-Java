@@ -7,12 +7,13 @@ import scr.model.service.Orfeu;
 import scr.model.service.Condition;
 
 public class StatVerify {
-    
-    private StatVerify(){}
 
-    public static String selectScene(Orfeu orfeu, ArrayList<Npc> npcs, Scene scene){
+    private StatVerify() {
+    }
+
+    public static String selectScene(Orfeu orfeu, ArrayList<Npc> npcs, Scene scene) {
         Condition condition = scene.getCondition();
-        
+
         if (condition == null) {
             return null;
         }
@@ -21,7 +22,7 @@ public class StatVerify {
         if (condition.isMet(orfeu, npcs)) {
             return condition.getNextSceneId();
         }
-        
+
         return null;
     }
 }
