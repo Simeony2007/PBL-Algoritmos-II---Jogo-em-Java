@@ -8,13 +8,22 @@ import scr.view.GameInterface;
 
 public class Game {
     private GameState state;
+	
+    /**
+     * Método construtor. Cria um novo GameState adicionando os personagens
+     * e os capítulos.
+     */
     public Game() {
         this.state = new GameState(
             StoryBuilder.getOrfeu(),
             StoryBuilder.GetNpcs(),
             StoryBuilder.getChapters());
 	    }
-
+    
+    /**
+     * É o Core do jogo, é a lógica de funcionamento.
+     * Mostra falas, passa cenas e capítulos de acordo com decisões
+     */
     public void gameRunning() {
         while (state.isRunning()) {
             Chapter currentChapter = state.getCurrentChapter();
@@ -78,6 +87,12 @@ public class Game {
         GameInterface.clearConsole();
     }
 
+    /**
+     * Recebe um valor máximo e recebe uma entrada do usuário.
+     * Faz a conversão em inteiro e retorna um valor dentro do máximo.
+     * @param maxChoices int
+     * @return escolha int
+     */
     private int getNumberInput(int maxChoices) {
         int choice;
         while (true) {
